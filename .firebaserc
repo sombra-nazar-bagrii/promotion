@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "promotion-8ca35"
+  },
+  "targets": {
+    "promotion-8ca35": {
+      "hosting": {
+        "promotionT": [
+          "promotion-8ca35"
+        ]
+      }
+    }
+  }
+}
