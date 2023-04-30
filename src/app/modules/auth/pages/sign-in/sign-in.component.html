@@ -1,0 +1,61 @@
+<section class="sign-in">
+  <img class="sign-in__image" src="/assets/images/waving-hand.png" alt="waving hand">
+
+  <div>
+    <h1>Welcome back</h1>
+    <p>Sign in to manage your account.</p>
+  </div>
+
+  <form [formGroup]="loginForm" (submit)="signInWithCredentials()">
+    <promo-input
+      formControlName="email"
+      label="Email address"
+      placeholder="Enter your email address"
+    ></promo-input>
+    <promo-input
+      formControlName="password"
+      label="Password"
+      placeholder="Enter your password"
+    ></promo-input>
+
+    <a [routerLink]="['../', ROUTES_DATA.AUTH.children.FORGOT_PASSWORD.url]">Forgot your password?</a>
+
+    <promo-button
+      variant="flat"
+      class="sign-in__submit"
+      tall
+      type="submit"
+      [disabled]="loginForm.invalid"
+    >Sign in
+    </promo-button>
+  </form>
+
+  <promo-divider>
+    Or do it via other accounts
+  </promo-divider>
+
+  <div class="sign-in__options">
+    <div class=""></div>
+    <promo-button
+      variant="link"
+      class="sign-in__options__item"
+      (click)="signInWithFacebook()"
+    >
+      <promo-icon icon="Facebook"></promo-icon>
+    </promo-button>
+
+    <promo-button
+      variant="link"
+      class="sign-in__options__item"
+      (click)="signInWithGoogle()"
+    >
+      <promo-icon icon="Google"></promo-icon>
+    </promo-button>
+  </div>
+
+  <p class="sign-in__registration">
+    Don’t have an account? <a [routerLink]="['../', ROUTES_DATA.AUTH.children.SIGN_UP.url]">Sign Up</a>
+  </p>
+
+</section>
+

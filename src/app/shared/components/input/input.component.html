@@ -1,0 +1,23 @@
+<div class="input__wrapper">
+  <label class="input__label">{{label}}</label>
+  <mat-form-field floatLabel="never" appearance="outline" [class.error]="showError && control.errors">
+    <input
+      type="text"
+      matInput
+      #input
+      [required]="required"
+      [disabled]="disabled"
+      [minlength]="minlength"
+      [placeholder]="placeholder"
+      [(ngModel)]="data"
+      [ngModelOptions]="{standalone: true}"
+      (input)="onChange()"
+      (change)="onChange()"
+      (blur)="onTouchedFn()"/>
+    <ng-container *ngIf="showError">
+      <mat-error *ngIf="control.hasError('required')">Please fill the field</mat-error>
+      <mat-error *ngIf="control.hasError('confirmedValidator')">Passwords should match</mat-error>
+      <mat-error *ngIf="control.hasError('confirmedValidator')">Passwords should match</mat-error>
+    </ng-container>
+  </mat-form-field>
+</div>

@@ -1,0 +1,11 @@
+<ng-container>
+  <div class="layout-auth">
+    <section
+      *ngIf="authImagType$ | async as imageClass"
+      [class]="'layout-auth__image ' + imageClass"
+    ></section>
+    <section class="layout-auth__content">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+</ng-container>

@@ -1,0 +1,87 @@
+$alignment-type: (
+  flex-start: flex-start,
+  center: center,
+  flex-end: flex-end,
+  stretch: stretch,
+  baseline: baseline,
+);
+
+$justify-type: (
+  flex-start: flex-start,
+  center: center,
+  flex-end: flex-end,
+  stretch: stretch,
+  space-evenly: space-evenly,
+  space-around: space-around,
+  space-between: space-between,
+);
+
+$flex-direction: (row, row-reverse, column, column-reverse);
+$flex-wrap: (wrap, nowrap, wrap-reverse);
+$flex-shrink-grow: (0, 1);
+
+.promo {
+  .inline-flex {
+    display: inline-flex;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .flex-auto {
+    flex: auto;
+  }
+
+  @each $prop in $flex-shrink-grow {
+    .flex-grow-#{$prop} {
+      flex-grow: $prop;
+    }
+    .flex-shrink-#{$prop} {
+      flex-shrink: $prop;
+    }
+  }
+
+  @each $prop in $flex-wrap {
+    .flex-#{$prop} {
+      flex-wrap: $prop;
+    }
+  }
+
+  @each $prop in $flex-direction {
+    .flex-#{$prop} {
+      flex-direction: $prop;
+    }
+  }
+
+  @each $prop, $alias in $alignment-type {
+    .align-self-#{$alias} {
+      align-self: $prop;
+    }
+  }
+
+  @each $prop, $alias in $alignment-type {
+    .align-items-#{$alias} {
+      align-items: $prop;
+    }
+  }
+
+  @each $prop, $alias in $alignment-type {
+    .align-content-#{$alias} {
+      align-content: $prop;
+    }
+  }
+
+  @each $prop, $alias in $justify-type {
+    .justify-content-#{$alias} {
+      justify-content: $prop;
+    }
+  }
+
+  @each $prop, $alias in $justify-type {
+    .justify-items-#{$alias} {
+      justify-items: $prop;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+@use "variables";
+
+.promo {
+  .mat-form-field-appearance-outline {
+    width: 100%;
+
+    &:not(.mat-form-field-disabled) {
+      .mat-form-field-flex:focus-within .mat-form-field-outline {
+        color: variables.$dodgerBlue;
+      }
+      .mat-form-field-flex:hover {
+        border-width: 1px;
+      }
+
+    }
+    .mat-error {
+      position: absolute;
+      top: 42px;
+      font-size: 14px;
+    }
+
+    .mat-form-field-outline {
+      color: variables.$porcelain;
+      background-color: variables.$porcelain;
+      border-radius: 5px;
+    }
+
+    .mat-form-field-infix {
+      padding-top: 4px;
+    }
+  }
+}

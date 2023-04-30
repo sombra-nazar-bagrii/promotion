@@ -1,0 +1,75 @@
+<section class="sign-up">
+  <div>
+    <h1>Get started today</h1>
+    <p>Enter your details to create super account.</p>
+  </div>
+
+  <form *ngIf="registerForm" [formGroup]="registerForm" (submit)="signUpWithCredentials()">
+    <div class="sign-up__field-group">
+      <promo-input
+        formControlName="name"
+        label="Name"
+        placeholder="Enter your name"
+      ></promo-input>
+      <promo-input
+        formControlName="age"
+        label="Age"
+        placeholder="Enter your age"
+      ></promo-input>
+    </div>
+
+    <promo-input
+      formControlName="email"
+      label="Email address"
+      placeholder="Enter your email address"
+    ></promo-input>
+    <promo-input
+      formControlName="password"
+      label="Password"
+      placeholder="Enter your password"
+    ></promo-input>
+    <promo-input
+      formControlName="confirmPassword"
+      label="Confirm New Password"
+      placeholder="Enter your new password again" 
+    ></promo-input>
+
+    <promo-button
+      variant="flat"
+      class="sign-up__submit"
+      tall
+      type="submit"
+      [disabled]="registerForm.invalid"
+    >Get started now
+    </promo-button>
+  </form>
+
+  <promo-divider>
+    Or sign up with
+  </promo-divider>
+
+  <div class="sign-up__options">
+    <div class=""></div>
+    <promo-button
+      variant="link"
+      class="sign-up__options__item"
+      (click)="signUpWithFacebook()"
+    >
+      <promo-icon icon="Facebook"></promo-icon>
+    </promo-button>
+
+    <promo-button
+      variant="link"
+      class="sign-up__options__item"
+      (click)="signUpWithGoogle()"
+    >
+      <promo-icon icon="Google"></promo-icon>
+    </promo-button>
+  </div>
+
+  <p class="sign-up__login">
+    Already have an account? <a [routerLink]="['../', ROUTES_DATA.AUTH.children.SIGN_IN.url]">Login</a>
+  </p>
+
+</section>
+

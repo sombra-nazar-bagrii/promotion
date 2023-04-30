@@ -1,0 +1,27 @@
+@use "variables/color";
+
+.promo {
+  .mat-snack-bar-container {
+    background: color.$white;
+    border-radius: 6px;
+    overflow: hidden;
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: currentColor;
+    }
+    &.snack-success {
+      color: color.$mountain-meadow;
+    }
+    &.snack-info {
+      color: color.$cerulean;
+    }
+    &.snack-error {
+      color: color.$flamingo;
+    }
+  }
+}

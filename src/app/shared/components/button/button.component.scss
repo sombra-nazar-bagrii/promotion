@@ -1,0 +1,34 @@
+@import 'variables';
+
+:host {
+  appearance: none;
+  display: inline-block;
+  line-height: normal;
+
+  button {
+    width: 100%;
+    font-weight: 400;
+
+    &:disabled {
+      pointer-events: none;
+    }
+
+    &.mat-icon-button {
+      height: auto;
+      line-height: normal;
+    }
+    &.mat-stroked-button {
+      border-color: currentColor;
+    }
+  }
+
+  &[tall] {
+    button {
+      min-height: 55px;
+    }
+  }
+
+  &[disabled='true'] {
+    pointer-events: none;
+  }
+}

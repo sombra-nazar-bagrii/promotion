@@ -1,0 +1,27 @@
+
+<section class="private">
+  <header class="private__header">
+    <div class="private__header__logo"></div>
+    <div class="private__header__body">
+
+      <promo-input
+
+      ></promo-input>
+
+      <div class="user-info" [matMenuTriggerFor]="menu">
+        <uzhosts-user-avatar></uzhosts-user-avatar>
+        <p class="user-info__name">Nazaritios Bargationi</p>
+        <mat-icon>expand_more</mat-icon>
+      </div>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item>Edit Profile</button>
+        <button (click)="signOut()" mat-menu-item>Log out</button>
+      </mat-menu>
+    </div>
+  </header>
+  <mat-drawer-container class="private__container">
+    <mat-drawer class="private__container__nav" mode="side" opened>Drawer content</mat-drawer>
+    <mat-drawer-content class="private__container__body">Main content</mat-drawer-content>
+  </mat-drawer-container>
+</section>
+
