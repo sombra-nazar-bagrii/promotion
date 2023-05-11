@@ -13,36 +13,20 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 })
 export class InputComponent implements ControlValueAccessor {
 
-  @Input()
-  public label: string;
+  @Input() label: string;
+  @Input() placeholder: string;
+  @Input() required = false;
+  @Input() disabled = false;
+  @Input() data: string;
+  @Input() minlength = 0;
+  @Input() prefix = false;
 
-  @Input()
-  public placeholder: string;
+  public onChangeFn = (_: any) => {};
 
-  @Input()
-  public required = false;
-
-  @Input()
-  public disabled = false;
-
-  @Input()
-  public data: string;
-
-  @Input()
-  public minlength = 0;
-
-  // private errorMessages = new Map<string, () => string>();
-
-  public onChangeFn = (_: any) => {
-  };
-
-  public onTouchedFn = () => {
-  };
+  public onTouchedFn = () => {};
 
   constructor(@Self() @Optional() public control: NgControl) {
     this.control && (this.control.valueAccessor = this);
-    // this.errorMessages.set('required', () => `${this.label} is required.`);
-    // this.errorMessages.set('minlength', () => `The no. of characters should not be less than ${this.minlength}.`);
   }
 
   public get invalid(): boolean {

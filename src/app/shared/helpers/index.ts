@@ -35,3 +35,26 @@ export const getLastChildRoute = (activatedRoute) => {
   }
   return route;
 };
+
+export function plainDeleteNullableValues(obj: object) {
+  Object.keys(obj).forEach((key) => {
+    if (isNullOrUndefined(obj[key])) {
+      delete obj[key];
+    }
+  });
+  return obj;
+}
+
+export function getEnumPropNameByValue(value: number, enumObj: any): string | undefined {
+  const enumKeys = Object.keys(enumObj).filter(key => typeof enumObj[key] === "number");
+  const enumValues = enumKeys.map(key => enumObj[key]);
+  const index = enumValues.indexOf(value);
+  if (index === -1) {
+    return undefined;
+  }
+  return enumKeys[index];
+}
+
+export function isNil(value: any): value is null | undefined {
+  return value === null || typeof value === 'undefined';
+}

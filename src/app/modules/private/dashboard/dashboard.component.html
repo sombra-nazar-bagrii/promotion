@@ -1,1 +1,53 @@
-<p>dashboard works!</p>
+<section class="dashboard__wrapper">
+  <main class="dashboard__main">
+    <header class="dashboard__main__header">
+      <h3>Articles Dashboard</h3>
+      <promo-category-selector
+        (onCategoryChange)="category$.next($event)"
+      ></promo-category-selector>
+      <promo-sorting-selector
+        (onSortingChange)="sorting$.next($event)"
+      ></promo-sorting-selector>
+    </header>
+
+    <ng-container *ngIf="articles$ | async as articles; else loading">
+      <div class="articles">
+        <promo-article-preview
+          *ngFor="let article of articles; trackBy: trackByFn"
+          [article]="article"
+        ></promo-article-preview>
+      </div>
+
+      <promo-button
+        *ngIf="!(articles.length % 10) && articles.length !== 0"
+        (click)="showCount$.next(showCount$.value + loadMoreCount)"
+      >Load more</promo-button>
+
+      <div *ngIf="articles.length === 0">
+        No articles...
+      </div>
+
+    </ng-container>
+
+    <ng-template #loading>
+      <ngx-skeleton-loader
+        count="10"
+        appearance="line"
+        [theme]="{ height: '40px' }"
+      ></ngx-skeleton-loader>
+    </ng-template>
+
+
+
+  </main>
+  <aside class="dashboard__aside">
+    <a
+      mat-flat-button
+      class="float-right"
+      [routerLink]="['../', ROUTES_DATA.PRIVATE.children.ARTICLE.url, 'manage', 'new']"
+      >
+      <mat-icon>add</mat-icon>
+      Add Article
+    </a>
+  </aside>
+</section>

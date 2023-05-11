@@ -1,0 +1,17 @@
+<div class="textarea__wrapper">
+  <label class="textarea__label">{{label}}</label>
+  <mat-form-field floatLabel="never" appearance="outline" [class.error]="showError && control.errors">
+    <textarea
+      type="text"
+      matInput
+      [required]="required"
+      [disabled]="disabled"
+      [minlength]="minlength"
+      [placeholder]="placeholder"
+      [(ngModel)]="data"
+      [ngModelOptions]="{standalone: true}"
+      (input)="onChange()"
+      (change)="onChange()"
+      (blur)="onTouchedFn()"></textarea>
+  </mat-form-field>
+</div>

@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ROUTES_DATA, EmailFormatValidator, ConfirmPasswordValidator } from '@shared';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ROUTES_DATA, ConfirmPasswordValidator } from '@shared';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "@core";
 
 @Component({
   selector: 'promo-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignUpComponent implements OnInit {
   ROUTES_DATA = ROUTES_DATA;
@@ -33,7 +34,8 @@ export class SignUpComponent implements OnInit {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       age: ['', Validators.required],
-      email: ['', Validators.compose([Validators.required, EmailFormatValidator])],
+      // EmailFormatValidator
+      email: ['', Validators.compose([Validators.required])],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     }, {

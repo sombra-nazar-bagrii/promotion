@@ -17,7 +17,10 @@
     <ng-container *ngIf="showError">
       <mat-error *ngIf="control.hasError('required')">Please fill the field</mat-error>
       <mat-error *ngIf="control.hasError('confirmedValidator')">Passwords should match</mat-error>
-      <mat-error *ngIf="control.hasError('confirmedValidator')">Passwords should match</mat-error>
+      <mat-error *ngIf="control.hasError('emailFormat')">Invalid email address</mat-error>
     </ng-container>
+    <span *ngIf="prefix" matPrefix>
+      <ng-content select="[prefix]"></ng-content>
+    </span>
   </mat-form-field>
 </div>

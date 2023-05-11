@@ -1,16 +1,28 @@
 
-<section class="private">
+<section class="private" *ngIf="currentUser$ | async as current">
   <header class="private__header">
     <div class="private__header__logo"></div>
     <div class="private__header__body">
 
-      <promo-input
+      <!--<ng-select
+        [items]="items$ | async"
+        bindLabel="name"
+        bindValue="name"
+        [closeOnSelect]="true"
+        [typeahead]="input$"
+      >
+      </ng-select>
 
-      ></promo-input>
+      <promo-input
+        [formControl]="searchArticle"
+        [prefix]="true"
+      >
+        <mat-icon prefix>search</mat-icon>
+      </promo-input>-->
 
       <div class="user-info" [matMenuTriggerFor]="menu">
-        <uzhosts-user-avatar></uzhosts-user-avatar>
-        <p class="user-info__name">Nazaritios Bargationi</p>
+        <uzhosts-user-avatar [avatarPath]="current.photoURL"></uzhosts-user-avatar>
+        <p class="user-info__name">{{ current.userName }}</p>
         <mat-icon>expand_more</mat-icon>
       </div>
       <mat-menu #menu="matMenu" xPosition="before">
@@ -21,7 +33,9 @@
   </header>
   <mat-drawer-container class="private__container">
     <mat-drawer class="private__container__nav" mode="side" opened>Drawer content</mat-drawer>
-    <mat-drawer-content class="private__container__body">Main content</mat-drawer-content>
+    <mat-drawer-content class="private__container__body">
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
   </mat-drawer-container>
 </section>
 

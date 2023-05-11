@@ -28,6 +28,12 @@
     }
   }
 
+  &[dense] {
+    button {
+      padding: 0;
+    }
+  }
+
   &[disabled='true'] {
     pointer-events: none;
   }

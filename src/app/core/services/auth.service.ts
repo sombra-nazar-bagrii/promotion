@@ -6,8 +6,8 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { IUser, ROUTES_DATA, IUserRegistration } from "@shared";
-import { switchMap, from, tap, mergeMap } from "rxjs";
+import { IUser, ROUTES_DATA, IUserRegistration, SnackBarService, SNACK_BAR, plainDeleteNullableValues } from "@shared";
+import { switchMap, from, mergeMap } from "rxjs";
 import { ProfileService } from "./profile.service";
 import { FirebaseErrorResponse } from "../../shared/models";
 import firebase from "firebase/compat";
@@ -23,11 +23,12 @@ export class AuthService {
     public afAuth: AngularFireAuth,
     public router: Router,
     public ngZone: NgZone,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private snackBarService: SnackBarService
   ) {
   }
 
-  signIn({ email, password }: { email: string, password: string }) {
+  signIn({ email, password }: Partial<IUserRegistration>) {
     return from(
       this.afAuth.signInWithEmailAndPassword(email, password).catch(error => {
         throw new FirebaseErrorResponse(error);
@@ -49,68 +50,58 @@ export class AuthService {
     ).pipe(
       mergeMap(result => [
         result.user.sendEmailVerification(),
-        this.setUserData(result.user, userDetails)
+        this.setUserData({ ...result.user, ...userDetails })
       ]),
-    ).subscribe();
-
-/*    return this.afAuth
-      .createUserWithEmailAndPassword(userDetails.email, userDetails.password)
-      .then((result) => {
-        this.sendVerificationMail();
-        this.setUserData(result.user, userDetails);
-      })
-      .catch((error) => {
-        window.alert(error.message);
-      });*/
+    ).subscribe(() => {
+      this.snackBarService.openSuccessSnackBar(SNACK_BAR.success.account_created);
+      this.router.navigate([ROUTES_DATA.AUTH.children.SIGN_IN.url])
+    });
   }
 
   forgotPassword(passwordResetEmail: string) {
     return this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
-      .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
-      })
-      .catch((error) => {
-        window.alert(error);
+      .then(() => this.snackBarService.openSuccessSnackBar(SNACK_BAR.success.password_change_request))
+      .catch(error => {
+        throw new FirebaseErrorResponse(error);
       });
   }
 
-/*  googleAuth() {
-    return this.authLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      this.router.navigate(['dashboard']);
-    });
+  googleAuth = () => this.authLogin(new auth.GoogleAuthProvider());
+  fbAuth = () => this.authLogin(new auth.FacebookAuthProvider());
+
+  private authLogin(provider: AuthProvider) {
+    from(this.afAuth.signInWithPopup(provider).catch(error => {
+      throw new FirebaseErrorResponse(error);
+    })).pipe(
+      switchMap(user => this.setUserData(user.user)),
+      switchMap(() => this.profileService.invokeUserProfile()),
+    ).subscribe(user => {
+      if (user) {
+        this.router.navigate([ROUTES_DATA.PRIVATE.children.DASHBOARD.url])
+      }
+    })
   }
 
-  authLogin(provider: AuthProvider) {
-    return this.afAuth
-      .signInWithPopup(provider)
-      .then((result) => {
-        this.router.navigate(['dashboard']);
-        this.setUserData(result.user);
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
-  }*/
-
-  setUserData(user: any, userDetails: IUserRegistration) {
+  setUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
-    const userData: Partial<IUser> = {
+    const userData: Partial<IUser> = plainDeleteNullableValues({
       uid: user.uid,
       email: user.email,
-      age: userDetails.age,
-      userName: userDetails.name,
-      photoURL: user.photoURL,
-    };
+      age: user?.age,
+      userName: user.displayName,
+      photoURL: user?.photoURL,
+    });
     return userRef.set(userData, {
       merge: true,
     });
   }
 
-  signOut = () => from(this.afAuth.signOut()).pipe(
-    tap(() => this.router.navigate(['../', ROUTES_DATA.AUTH.children.SIGN_IN.url]))
-  ).subscribe()
+  signOut = () => this.afAuth.signOut().then(() => {
+    this.router.navigate(['../', ROUTES_DATA.AUTH.children.SIGN_IN.url]);
+    this.profileService.clearUserProfile();
+  })
 
 }

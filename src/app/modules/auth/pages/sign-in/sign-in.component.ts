@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Validators, FormBuilder } from "@angular/forms";
 import { ROUTES_DATA } from "@shared";
 import { AuthService } from "@core";
@@ -6,9 +6,10 @@ import { AuthService } from "@core";
 @Component({
   selector: 'promo-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  styleUrls: ['./sign-in.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent {
 
   ROUTES_DATA = ROUTES_DATA;
 
@@ -18,25 +19,18 @@ export class SignInComponent implements OnInit {
   ) { }
 
   loginForm = this.fb.group({
+    // EmailFormatValidator
     email: ['', Validators.required],
     password: ['', Validators.required],
   });
 
-  ngOnInit(): void {
-  }
-
   signInWithCredentials() {
     if (this.loginForm.invalid) return;
-    this.authService.signIn(this.loginForm.value as { email: string; password: string; })
+    this.authService.signIn(this.loginForm.value)
   }
 
-  signInWithFacebook() {
-
-  }
-
-  signInWithGoogle() {
-
-  }
+  signInWithFacebook = this.authService.fbAuth;
+  signInWithGoogle = this.authService.googleAuth;
 
 
 }

@@ -23,6 +23,10 @@ export const ROUTES_DATA = {
         title: 'Dashboard',
         url: 'dashboard',
       },
+      ARTICLE: {
+        title: 'Article',
+        url: 'article'
+      }
     }
   },
 

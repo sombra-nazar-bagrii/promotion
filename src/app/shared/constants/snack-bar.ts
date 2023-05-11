@@ -8,6 +8,14 @@ export const SNACK_BAR = {
       user_not_found: {
         key: 'Whoops',
         value: 'There is no user record corresponding to this identifier.',
+      },
+      popup_closed_by_user: {
+        key: 'Whoops',
+        value: 'Please try again and select you account',
+      },
+      wrong_password: {
+        key: 'Whoops',
+        value: 'Please check correctness of entered data',
       }
     },
     SERVER_ERROR: {
@@ -16,7 +24,22 @@ export const SNACK_BAR = {
     }
   },
   success: {
-
+    account_created: {
+      key: 'Success!',
+      value: 'Confirmation link send to the provided email address. Please confirm your account and login.',
+    },
+    password_change_request: {
+      key: 'Success!',
+      value: 'Reset password link send to the provided email address.',
+    },
+    article_updated: {
+      key: 'Success!',
+      value: 'Article information updated successfully.',
+    },
+    article_created: {
+      key: 'Success!',
+      value: 'Article successfully created and published.',
+    },
   },
   info: {
 

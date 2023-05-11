@@ -20,8 +20,9 @@ export class ProfileService {
     return this.angularFireAuth.authState.pipe(
       switchMap(user => this.angularFirestore.doc<IUser>(`users/${user.uid}`).get()),
       map(resp => resp.data()),
+      tap(current => this.setCurrentUser(current)),
       take(1),
-      catchError((e) => {
+      catchError(() => {
         this.clearUserProfile();
         return of(null);
       })
@@ -38,5 +39,9 @@ export class ProfileService {
 
   clearUserProfile() {
     this.currentUser$.next(null);
+  }
+
+  getUserById(userId: string): Observable<IUser> {
+    return this.angularFirestore.doc<IUser>(`users/${userId}`).valueChanges();
   }
 }

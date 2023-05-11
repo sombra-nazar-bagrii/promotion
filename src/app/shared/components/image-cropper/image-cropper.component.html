@@ -1,0 +1,23 @@
+<image-cropper
+  class="cropper"
+  [imageFile]="data.image"
+  [maintainAspectRatio]="true"
+  [imageQuality]="50"
+  [aspectRatio]="data.rounded ? 1 / 1 : 6 / 4"
+  [roundCropper]="data.rounded ?? false"
+  format="png"
+  (imageCropped)="imageCropped($event)"></image-cropper>
+
+<div class="cropper-actions">
+  <promo-button
+    class="margin-right-3"
+    color="accent"
+    [mat-dialog-close]="false"
+  >Cancel
+  </promo-button>
+  <promo-button
+    [mat-dialog-close]="{ croppedImage: croppedImage, file: file }"
+  >Confirm
+  </promo-button
+  >
+</div>

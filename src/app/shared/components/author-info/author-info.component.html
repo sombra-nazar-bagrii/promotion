@@ -1,0 +1,7 @@
+<div class="author-info" *ngIf="author$ | async as user">
+  <uzhosts-user-avatar
+    [avatarPath]="user.photoURL"
+    [avatarSize]="34"
+  ></uzhosts-user-avatar>
+  {{ user.userName }}
+</div>

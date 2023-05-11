@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { PrivateRoutingModule } from './private-routing.module';
 import { SharedModule } from "@shared";
-import { PrivateLayoutComponent } from './layout/private-layout.component';
+import { PrivateLayoutComponent } from './layout';
 
 
 @NgModule({
   declarations: [
-    PrivateLayoutComponent
+    PrivateLayoutComponent,
   ],
   imports: [
     CommonModule,

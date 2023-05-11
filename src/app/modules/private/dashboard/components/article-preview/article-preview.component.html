@@ -1,0 +1,19 @@
+<mat-card class="article-preview" *ngIf="article">
+  <img class="article-preview__image" mat-card-image [src]="article.coverPhoto" alt="Article photo">
+  <mat-card-content class="article-preview__body">
+    <div class="info-row">
+      <span>
+        {{ getCategoryName(article.category) | uppercase }}
+      </span>
+      <span>{{ getDisplayDate(article.createdAt) }}</span>
+    </div>
+
+    <h2 class="article-preview__body__title">{{ article.title }}</h2>
+    <p class="article-preview__body__text">{{ article.body }}</p>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>

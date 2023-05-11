@@ -1,0 +1,57 @@
+@use "variables";
+
+.article {
+  position: relative;
+  background: #FFFFFF;
+  box-shadow: 0px 24px 64px rgba(0, 0, 0, 0.03);
+  border-radius: 6px;
+  max-width: 800px;
+  margin: 0 auto;
+
+  &__main {
+    &-wrapper {
+      position: relative;
+    }
+
+    &__title {
+      position: absolute;
+      top: 70%;
+      padding: 10px;
+      margin: 0 20px;
+      background-color: variables.$white;
+      border-radius: 6px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+      h1 {
+        text-align: center;
+        margin-bottom: 0;
+      }
+    }
+
+    &__photo {
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    &__details {
+      position: absolute;
+      bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: bisque;
+      opacity: 0.8;
+      width: 100%;
+    }
+  }
+
+  &__body {
+    padding: 20px;
+  }
+}
+
+

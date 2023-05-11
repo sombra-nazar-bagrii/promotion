@@ -1,0 +1,38 @@
+<promo-back-link
+  text="Go back to dashboard"
+  [link]="'/' + ROUTES_DATA.PRIVATE.children.DASHBOARD.url"
+></promo-back-link>
+
+
+<article class="article" *ngIf="article$ | async as article else loading">
+  <div class="article__main-wrapper">
+    <img
+      [src]="article.coverPhoto"
+      alt="Article cover photo"
+      class="article__main__photo"
+    >
+
+    <div class="article__main__title">
+      <h1>{{ article.title }}</h1>
+    </div>
+    <div class="article__main__details">
+      <promo-author-info [authorId]="article.authorId"></promo-author-info>
+      <span>Created {{ article.createdAt | date }}</span>
+    </div>
+  </div>
+
+
+  <p class="article__body">
+    {{ article.body }}
+  </p>
+
+</article>
+
+<ng-template #loading>
+  <ngx-skeleton-loader
+    count="10"
+    appearance="line"
+    [theme]="{ height: '40px' }"
+  ></ngx-skeleton-loader>
+</ng-template>
+

@@ -8,7 +8,7 @@ export interface IUser {
 }
 
 export interface IUserRegistration {
-  name: string;
+  displayName: string;
   email: string;
   age: string;
   password: string;

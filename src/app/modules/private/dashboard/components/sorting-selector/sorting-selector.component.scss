@@ -1,0 +1,26 @@
+@use "variables";
+
+.sorting-selector {
+  display: inline-flex;
+  column-gap: 12px;
+  align-items: center;
+  height: 40px;
+  background: variables.$white;
+  border-radius: 3px;
+  cursor: pointer;
+  padding-left: 8px;
+
+  &__prefix {
+    font-size: 14px;
+    color: rgba(111, 124, 139, 0.5);
+  }
+
+  &__icon {
+    color: rgba(111, 124, 139, 0.5);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid rgba(111, 124, 139, 0.5);
+  }
+}

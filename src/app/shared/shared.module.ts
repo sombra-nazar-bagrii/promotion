@@ -21,6 +21,9 @@ import { ImageCropperModule } from "ngx-image-cropper";
 import { QuillModule } from "ngx-quill";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatRippleModule } from "@angular/material/core";
+import { MatSelectModule } from "@angular/material/select";
+import { MatCardModule } from "@angular/material/card";
 
 export const MAT_MODULES = [
   MatButtonModule,
@@ -33,6 +36,9 @@ export const MAT_MODULES = [
   MatProgressSpinnerModule,
   MatMenuModule,
   MatSidenavModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatCardModule
 ];
 
 export const SHARED_MODULES = [

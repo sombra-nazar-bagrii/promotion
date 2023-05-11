@@ -1,0 +1,60 @@
+@import 'variables';
+
+.upload {
+  width: 100%;
+  &.active .upload-label {
+    border: 1px dashed $cornflower-blue;
+    background-color: darken($alabaster, 3);
+  }
+  &-label {
+    width: 100%;
+    min-height: 60px;
+    background-color: $alabaster;
+    border: 1px dashed $silver-chalice;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.35s, border 0.35s;
+  }
+
+  &-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    row-gap: 10px;
+    color: $black;
+    padding: 10px;
+
+    &__icon {
+      font-size: 44px;
+      height: 44px;
+      width: 44px;
+      color: rgba(111, 124, 139, 0.5);
+    }
+
+    &__info {
+      color: rgba(111, 124, 139, 0.5);
+    }
+
+  }
+  &-input {
+    display: none;
+  }
+}
+
+.maxSize {
+  margin-top: 8px;
+  display: inline-block;
+  font-size: 14px;
+  color: $silver-chalice;
+}
+
+.validation-error {
+  font-size: 14px;
+  color: $brick-red;
+  display: block;
+  padding-top: 8px;
+}
