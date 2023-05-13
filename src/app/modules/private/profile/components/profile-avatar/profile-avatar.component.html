@@ -1,0 +1,35 @@
+<section class="user-avatar">
+  <h4 class="user-avatar__title">Change your photo</h4>
+  <p>Click or Drag and drop file below</p>
+  <div
+    class="user-avatar__preview"
+    *ngIf="avatarPreview"
+  >
+    <img
+      [src]="avatarPreview"
+      alt="user avatar"
+      class="user-avatar__preview-image"
+    >
+  </div>
+  <promo-file-upload
+    [openCropper]="true"
+    [roundedCropper]="true"
+    (fileEvent)="onFileUpload($event)"
+  ></promo-file-upload>
+
+  <div class="user-avatar__actions">
+    <promo-button
+      tall
+      variant="stroked"
+      (click)="clearUploadFile()"
+    >Cancel
+    </promo-button>
+    <promo-button
+      tall
+      variant="flat"
+      [disabled]="!avatar"
+      (click)="onAvatarUpload()"
+    >Update
+    </promo-button>
+  </div>
+</section>

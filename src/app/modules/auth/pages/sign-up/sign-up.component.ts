@@ -36,8 +36,8 @@ export class SignUpComponent implements OnInit {
       age: ['', Validators.required],
       // EmailFormatValidator
       email: ['', Validators.compose([Validators.required])],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
     }, {
       validators: ConfirmPasswordValidator('password', 'confirmPassword')
     })

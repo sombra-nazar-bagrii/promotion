@@ -9,8 +9,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageCropperComponent {
-  croppedImage: any = '';
-  file: any = '';
+  croppedImage: string = '';
+  file: Blob;
 
   constructor(
     public dialogRef: MatDialogRef<ImageCropperComponent>,
@@ -19,6 +19,6 @@ export class ImageCropperComponent {
 
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
-    this.file = base64ToFile(event.base64 as any);
+    this.file = base64ToFile(event.base64);
   }
 }

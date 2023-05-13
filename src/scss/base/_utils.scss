@@ -1,7 +1,17 @@
+@use "variables";
+
 .float-right {
   float: right;
 }
 
 .m-b-0 {
   margin-bottom: 0;
+}
+
+.dodger-blue-color {
+  color: variables.$dodgerBlue
+}
+
+.w100 {
+  width: 100%;
 }

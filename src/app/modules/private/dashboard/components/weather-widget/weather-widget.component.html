@@ -1,0 +1,29 @@
+<section class="weather" *ngIf="weather$ | async as weather">
+  <h2 class="weather__header">Weather widget</h2>
+
+  <div class="weather__date">
+    <h4>{{ weather.date | date:'MMMM d' }}</h4>
+    <p>{{ weather.date | date:'EEEE'}}</p>
+  </div>
+
+  <div class="weather__main">
+    <div class="weather__main__temp">
+      <span class="weather__main__temp-value">{{ weather.temp }}</span>
+      <span class="weather__main__temp-location">{{ weather.locationName }}, Ukraine</span>
+    </div>
+    <img class="weather__main__icon" [src]="weather.iconUrl" alt="weather icon">
+  </div>
+
+  <promo-button
+    [matMenuTriggerFor]="menu"
+    class="weather__menu"
+    variant="icon"
+  ><mat-icon>more_horiz</mat-icon></promo-button>
+  <mat-menu #menu="matMenu">
+    <button
+      *ngFor="let region of iterableRegions()"
+      mat-menu-item
+      (click)="selectedRegion$.next(region)"
+    >{{ region.name }}</button>
+  </mat-menu>
+</section>

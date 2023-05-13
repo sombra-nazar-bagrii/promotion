@@ -5,11 +5,26 @@ import { RouterModule } from "@angular/router";
 import { DASHBOARD_COMPONENTS } from "./components";
 import { BehaviorSubject, Observable, combineLatest, switchMap, distinctUntilChanged } from "rxjs";
 import { ArticleService } from "@modules/private/article/article.service";
+import { ProfileService } from "@core";
+import { trigger, transition, animate, style } from "@angular/animations";
 
 @Component({
   selector: 'promo-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+  animations: [
+    trigger('articleAnimation', [
+      transition(':leave', [
+        animate(
+          400,
+          style({
+            opacity: 0,
+            height: 0,
+          })
+        ),
+      ]),
+    ]),
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
@@ -20,6 +35,7 @@ export class DashboardComponent implements OnInit {
   sorting$ = new BehaviorSubject<boolean>(true);
   ROUTES_DATA = ROUTES_DATA;
 
+  currentUser$ = this.profileService.getCurrentUser();
   articles$: Observable<IArticle[]> = combineLatest([
     this.category$,
     this.sorting$,
@@ -41,12 +57,12 @@ export class DashboardComponent implements OnInit {
   )
 
   constructor(
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private profileService: ProfileService
   ) {
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   trackByFn(index: number, article: IArticle) {
     return article.id;

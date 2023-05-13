@@ -1,3 +1,9 @@
+<promo-back-link
+  text="Go back to dashboard"
+  [link]="'/' + ROUTES_DATA.PRIVATE.children.DASHBOARD.url"
+></promo-back-link>
+
+
 <ng-container *ngIf="article$ | async as article">
   <form *ngIf="articleForm" [formGroup]="articleForm" class="article" (ngSubmit)="publishArticle()">
     <h2>{{ newArticle ? 'Add new article' : 'Edit article' }}</h2>

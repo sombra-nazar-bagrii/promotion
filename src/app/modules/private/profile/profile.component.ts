@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit, NgModule } from '@angular/c
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "@shared";
 import { CommonModule } from "@angular/common";
+import { PROFILE_COMPONENTS } from "./components";
+import { ProfileService } from "@core";
 
 @Component({
   selector: 'promo-profile',
@@ -11,7 +13,11 @@ import { CommonModule } from "@angular/common";
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  currentUser$ = this.profileService.getCurrentUser();
+
+  constructor(
+    private profileService: ProfileService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +35,10 @@ export class ProfileComponent implements OnInit {
       },
     ]),
   ],
-  declarations: [ProfileComponent],
+  declarations: [
+    ProfileComponent,
+    ...PROFILE_COMPONENTS
+  ],
   exports: [ProfileComponent],
 })
 export class ProfileModule {}

@@ -4,20 +4,8 @@ export const ROUTES_DATA = {
     url: '',
     children: {
       PROFILE: {
-        title: 'The best articles',
+        title: 'Profile',
         url: 'profile',
-        children: {
-          MY_PROFILE: {
-            title: 'My Profile',
-            url: 'my',
-            fullUrl: 'profile/my'
-          },
-          PROFILE_INFO: {
-            title: 'Profile info',
-            url: ':id',
-            fullUrl: 'profile/:id'
-          },
-        }
       },
       DASHBOARD: {
         title: 'Dashboard',

@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables';
 
 :host {
   appearance: none;
@@ -31,6 +31,12 @@
   &[dense] {
     button {
       padding: 0;
+    }
+  }
+
+  &[dodger-blue-color] {
+    button {
+      color: variables.$dodgerBlue;
     }
   }
 

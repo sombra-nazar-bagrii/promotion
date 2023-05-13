@@ -7,15 +7,15 @@
     <label class="upload-label">
       <div class="upload-title">
         <mat-icon class="upload-title__icon">cloud_upload</mat-icon>
-        <span class="upload-title__formats">.JPG .PNG</span>
+        <span class="upload-title__formats">{{ getInputAcceptTypesForView() | uppercase }}</span>
         <span class="upload-title__info">Upload file by click here or drag and drop</span>
       </div>
       <input
         #fileInput
         class="upload-input"
         type="file"
-        accept="image/jpg, image/png"
-        [multiple]="multiple"
+        [accept]="getInputAcceptTypes()"
+        [multiple]="false"
         (change)="fileChangeEvent($event)" />
     </label>
   </promo-button>

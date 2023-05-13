@@ -1,18 +1,18 @@
 
 
-export function isUndefined(value: any): boolean {
+export function isUndefined(value: string | number | boolean): boolean {
   return typeof value === 'undefined';
 }
 
-export function isNullOrUndefined(value: any): boolean {
+export function isNullOrUndefined(value: string | number | boolean): boolean {
   return value === null || isUndefined(value);
 }
 
-export function deepClone(obj: any): any {
+export function deepClone(obj: Object): Object {
   return JSON.parse(JSON.stringify(obj));
 }
 
-export function deepFind(obj: any, path: any) {
+export function deepFind(obj, path: string) {
   const paths = path?.split('.');
   let current = obj;
 
@@ -27,14 +27,6 @@ export function deepFind(obj: any, path: any) {
   }
   return current;
 }
-
-export const getLastChildRoute = (activatedRoute) => {
-  let route = activatedRoute.firstChild;
-  while (route.firstChild) {
-    route = route.firstChild;
-  }
-  return route;
-};
 
 export function plainDeleteNullableValues(obj: object) {
   Object.keys(obj).forEach((key) => {

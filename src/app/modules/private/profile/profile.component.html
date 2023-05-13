@@ -1,1 +1,21 @@
-<p>profile works!</p>
+<section class="profile">
+  <h3>Manage your account </h3>
+  <mat-tab-group *ngIf="currentUser$ | async as current; else loading">
+    <mat-tab label="Edit Information">
+      <promo-personal-info [current]="current" ></promo-personal-info>
+    </mat-tab>
+    <mat-tab label="User Avatar">
+      <promo-profile-avatar [current]="current" ></promo-profile-avatar>
+    </mat-tab>
+    <mat-tab label="Change Password">
+      <promo-profile-password [current]="current" ></promo-profile-password>
+    </mat-tab>
+  </mat-tab-group>
+  <ng-template #loading>
+    <ngx-skeleton-loader
+      count="10"
+      appearance="line"
+      [theme]="{ height: '40px' }"
+    ></ngx-skeleton-loader>
+  </ng-template>
+</section>

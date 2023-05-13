@@ -6,10 +6,18 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { IUser, ROUTES_DATA, IUserRegistration, SnackBarService, SNACK_BAR, plainDeleteNullableValues } from "@shared";
-import { switchMap, from, mergeMap } from "rxjs";
+import {
+  IUser,
+  ROUTES_DATA,
+  IUserRegistration,
+  SnackBarService,
+  SNACK_BAR,
+  plainDeleteNullableValues,
+  LoaderService,
+  FirebaseErrorResponse
+} from "@shared";
+import { switchMap, from, mergeMap, tap } from "rxjs";
 import { ProfileService } from "./profile.service";
-import { FirebaseErrorResponse } from "../../shared/models";
 import firebase from "firebase/compat";
 import AuthProvider = firebase.auth.AuthProvider;
 
@@ -24,18 +32,22 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone,
     private profileService: ProfileService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private loaderService: LoaderService
   ) {
   }
 
   signIn({ email, password }: Partial<IUserRegistration>) {
+    this.loaderService.setLoaderStatus(true);
     return from(
       this.afAuth.signInWithEmailAndPassword(email, password).catch(error => {
+        this.loaderService.setLoaderStatus(false);
         throw new FirebaseErrorResponse(error);
       })
     ).pipe(
       switchMap(() => this.profileService.invokeUserProfile()),
     ).subscribe(user => {
+      this.loaderService.setLoaderStatus(false);
       if (user) {
         this.router.navigate([ROUTES_DATA.PRIVATE.children.DASHBOARD.url])
       }
@@ -43,55 +55,63 @@ export class AuthService {
   }
 
   signUp(userDetails: IUserRegistration) {
+    this.loaderService.setLoaderStatus(true);
     from(this.afAuth.createUserWithEmailAndPassword(userDetails.email, userDetails.password)
       .catch(error => {
+        this.loaderService.setLoaderStatus(false);
         throw new FirebaseErrorResponse(error)
       })
     ).pipe(
       mergeMap(result => [
         result.user.sendEmailVerification(),
-        this.setUserData({ ...result.user, ...userDetails })
+        this.setUserData(result.user, userDetails)
       ]),
     ).subscribe(() => {
+      this.loaderService.setLoaderStatus(false);
       this.snackBarService.openSuccessSnackBar(SNACK_BAR.success.account_created);
       this.router.navigate([ROUTES_DATA.AUTH.children.SIGN_IN.url])
     });
   }
 
   forgotPassword(passwordResetEmail: string) {
-    return this.afAuth
-      .sendPasswordResetEmail(passwordResetEmail)
-      .then(() => this.snackBarService.openSuccessSnackBar(SNACK_BAR.success.password_change_request))
-      .catch(error => {
-        throw new FirebaseErrorResponse(error);
-      });
+    this.loaderService.setLoaderStatus(true);
+    return from(this.afAuth.sendPasswordResetEmail(passwordResetEmail).catch(error => {
+      this.loaderService.setLoaderStatus(false);
+      throw new FirebaseErrorResponse(error);
+    })).subscribe(() => {
+      this.loaderService.setLoaderStatus(false);
+      this.snackBarService.openSuccessSnackBar(SNACK_BAR.success.password_change_request)
+    });
   }
 
   googleAuth = () => this.authLogin(new auth.GoogleAuthProvider());
   fbAuth = () => this.authLogin(new auth.FacebookAuthProvider());
 
   private authLogin(provider: AuthProvider) {
+    this.loaderService.setLoaderStatus(true);
     from(this.afAuth.signInWithPopup(provider).catch(error => {
+      this.loaderService.setLoaderStatus(false);
       throw new FirebaseErrorResponse(error);
     })).pipe(
       switchMap(user => this.setUserData(user.user)),
       switchMap(() => this.profileService.invokeUserProfile()),
     ).subscribe(user => {
+      this.loaderService.setLoaderStatus(false);
       if (user) {
         this.router.navigate([ROUTES_DATA.PRIVATE.children.DASHBOARD.url])
       }
     })
   }
 
-  setUserData(user: any) {
+  private setUserData(user: any, userDetails?: IUserRegistration) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
     const userData: Partial<IUser> = plainDeleteNullableValues({
       uid: user.uid,
-      email: user.email,
-      age: user?.age,
-      userName: user.displayName,
+      email: user?.email || userDetails?.email,
+      age: user?.age || userDetails?.age,
+      userName: user?.displayName || userDetails?.displayName,
       photoURL: user?.photoURL,
     });
     return userRef.set(userData, {
@@ -103,5 +123,16 @@ export class AuthService {
     this.router.navigate(['../', ROUTES_DATA.AUTH.children.SIGN_IN.url]);
     this.profileService.clearUserProfile();
   })
+
+  changePassword(newPassword: string) {
+    this.loaderService.setLoaderStatus(true);
+    return from(this.afAuth.currentUser).pipe(
+      mergeMap((user) => user.updatePassword(newPassword).catch(error => {
+        this.loaderService.setLoaderStatus(false);
+        throw new FirebaseErrorResponse(error);
+      })),
+      tap(() => this.loaderService.setLoaderStatus(false))
+    );
+  }
 
 }

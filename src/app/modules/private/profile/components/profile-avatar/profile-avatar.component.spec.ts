@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WetherWidgetComponent } from './wether-widget.component';
+import { ProfileAvatarComponent } from './profile-avatar.component';
 
-describe('WetherWidgetComponent', () => {
-  let component: WetherWidgetComponent;
-  let fixture: ComponentFixture<WetherWidgetComponent>;
+describe('ProfileAvatarComponent', () => {
+  let component: ProfileAvatarComponent;
+  let fixture: ComponentFixture<ProfileAvatarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WetherWidgetComponent ]
+      declarations: [ ProfileAvatarComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WetherWidgetComponent);
+    fixture = TestBed.createComponent(ProfileAvatarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

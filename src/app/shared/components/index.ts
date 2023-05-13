@@ -9,6 +9,7 @@ import { ImageCropperComponent } from "./image-cropper";
 import { TextareaComponent } from "./textarea";
 import { BackLinkComponent } from "./back-link";
 import { AuthorInfoComponent } from "./author-info";
+import { ProgressSpinnerComponent } from "./progress-spinner";
 
 export * from './snack-bar';
 
@@ -23,5 +24,6 @@ export const SHARED_COMPONENTS = [
   ImageCropperComponent,
   TextareaComponent,
   BackLinkComponent,
-  AuthorInfoComponent
+  AuthorInfoComponent,
+  ProgressSpinnerComponent
 ]

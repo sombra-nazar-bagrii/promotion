@@ -22,10 +22,6 @@ const routes: Routes = [
         loadChildren: () => import('./profile').then((m) => m.ProfileModule),
       },
       {
-        path: ROUTES_DATA.PRIVATE.children.PROFILE.url,
-        loadChildren: () => import('./profile').then((m) => m.ProfileModule),
-      },
-      {
         path: ROUTES_DATA.PRIVATE.children.ARTICLE.url,
         loadChildren: () => import('./article').then((m) => m.ArticleModule),
       }

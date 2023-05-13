@@ -8,15 +8,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { SnackBarComponent } from '../snack-bar';
-import { ISnackBarConf } from '../../interfaces';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { ImageCropperComponent } from '../image-cropper/image-cropper.component';
+import { ImageCropperComponent } from '../image-cropper';
+import { SnackBarService, SNACK_BAR } from "@shared";
 
 export interface IOutPutData {
   base64: string;
-  fileToUpload: any;
+  fileToUpload: File;
 }
 
 @Component({
@@ -30,37 +28,29 @@ export class FileUploadComponent {
   @Input() openCropper = false;
   @Input() multiple = false;
   @Input() roundedCropper = false;
+  @Input() acceptTypes = ['png', 'jpg', 'jpeg'];
   @Output() fileEvent = new EventEmitter<IOutPutData>();
   readonly fileSizeLimitMB = 1;
-  invalidFiles: string[] = [];
 
   constructor(
-    private snackBar: MatSnackBar,
     private dialog: MatDialog,
+    private snackBarService: SnackBarService,
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  fileChangeEvent = (event: any) => this._handleFiles(event.target?.files ?? []);
+  fileChangeEvent = (event) => this._handleFiles(event.target?.files ?? []);
 
   onFileDropped = (files) => this._handleFiles(files);
 
   private _handleFiles(files: File[]) {
     if (!files.length) return;
-    if (this.openCropper) {
-      const file = Object.values(files).filter(
-        ({ type }) => type.startsWith('image') && !type.endsWith('svg+xml')
-      )?.[0];
-      if (file) this._manageImageCropper(file);
-    } else {
-      Array.from(files).forEach((file: File) =>
-        this._validateTypeAndSize(file)
-          ? this._handleUpload(file)
-          : this.invalidFiles.push(file.name)
-      );
-    }
 
-    this.invalidFiles.length && this._showValidationError(this.invalidFiles.join(', '));
-    this.invalidFiles = [];
+    const file = files[0];
+
+    if (!this._validFileType(file)) return this.snackBarService.openErrorSnackBar(SNACK_BAR.error.invalid_file_type);
+    if (!this._validFileSize(file)) return this.snackBarService.openErrorSnackBar(SNACK_BAR.error.invalid_file_size);
+
+    if (file) this._manageImageCropper(file);
   }
 
   private _manageImageCropper(file: File) {
@@ -68,7 +58,8 @@ export class FileUploadComponent {
       maxWidth: '90vw',
       data: { image: file, rounded: this.roundedCropper },
     });
-    imageCropper.afterClosed().subscribe((data: any) => {
+
+    imageCropper.afterClosed().subscribe((data) => {
       this.fileEvent.emit({
         base64: data.croppedImage || null,
         fileToUpload: data.file,
@@ -78,28 +69,9 @@ export class FileUploadComponent {
     });
   }
 
-  private _validateTypeAndSize = (file: any) => file.size < this.fileSizeLimitMB * 1_000_000;
+  getInputAcceptTypes = () => this.acceptTypes.map(type => `image/${type}`).join(', ');
+  getInputAcceptTypesForView = () => this.acceptTypes.map(type => `.${type}`).join(' ');
 
-  private _showValidationError = (fileNames: string) =>
-    this.snackBar.openFromComponent(SnackBarComponent, {
-      duration: 10_000,
-      horizontalPosition: 'right',
-      panelClass: [`snack-error`],
-      data: {
-        title: 'files.validation.title',
-        message: fileNames,
-        icon: 'error',
-      } as ISnackBarConf,
-    });
-
-  private _handleUpload(file: any) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.fileEvent.emit({
-        base64: (reader.result as any) || null,
-        fileToUpload: file,
-      });
-    };
-  }
+  private _validFileType = (file: File) => this.acceptTypes.some(type => file.type.endsWith(type))
+  private _validFileSize = (file: File) => file.size < this.fileSizeLimitMB * 1_000_000;
 }

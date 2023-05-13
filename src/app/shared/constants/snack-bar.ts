@@ -16,12 +16,20 @@ export const SNACK_BAR = {
       wrong_password: {
         key: 'Whoops',
         value: 'Please check correctness of entered data',
-      }
+      },
     },
     SERVER_ERROR: {
       key: 'Something went wrong!',
       value: 'Please try again letter',
-    }
+    },
+    invalid_file_type: {
+      key: 'Whoops',
+      value: 'Looks like you are using unsupported file types. Please use only .png or .jpg.',
+    },
+    invalid_file_size: {
+      key: 'Whoops',
+      value: 'Looks like you are trying upload too big file.',
+    },
   },
   success: {
     account_created: {
@@ -40,6 +48,22 @@ export const SNACK_BAR = {
       key: 'Success!',
       value: 'Article successfully created and published.',
     },
+    article_deleted: {
+      key: 'Success!',
+      value: 'Article successfully deleted.',
+    },
+    user_info_updated: {
+      key: 'Success!',
+      value: 'Profile information successfully updated.',
+    },
+    user_password_updated: {
+      key: 'Success!',
+      value: 'Password successfully updated.',
+    },
+    user_avatar_updated: {
+      key: 'Success!',
+      value: 'Profile avatar successfully updated.',
+    }
   },
   info: {
 

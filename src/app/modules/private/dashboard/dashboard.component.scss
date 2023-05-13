@@ -21,8 +21,8 @@
       padding: 20px 0;
       display: grid;
       align-items: stretch;
-      column-gap: 20px;
-      row-gap: 20px;
+      column-gap: 40px;
+      row-gap: 30px;
       grid-template-columns: repeat(2, 1fr)
     }
 
@@ -30,5 +30,9 @@
 
   &__aside {
     width: 25%;
+    &__add {
+      margin-bottom: 24px;
+      float: right;
+    }
   }
 }

@@ -10,10 +10,8 @@
     background-size: cover;
     width: 40%;
     height: 100%;
+    background-image: url('/assets/images/sign-in.png');
 
-    &.sign-in {
-      background-image: url('/assets/images/sign-in.png');
-    }
     &.sign-up {
       background-image: url('/assets/images/sign-up.png');
     }

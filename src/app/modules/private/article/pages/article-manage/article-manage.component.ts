@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { tap, switchMap, of, Observable, EMPTY, combineLatest } from "rxjs";
-import { IArticle, SnackBarService, SNACK_BAR, ROUTES_DATA, ArticleCategory } from "@shared";
+import { IArticle, SnackBarService, SNACK_BAR, ROUTES_DATA, ArticleCategory, LoaderService } from "@shared";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { IOutPutData } from "../../../../../shared/components/file-upload";
 import { ArticleService } from "../../article.service";
@@ -16,6 +16,7 @@ import { ProfileService } from "@core";
 export class ArticleManageComponent implements OnInit {
 
   private _id: string;
+  ROUTES_DATA = ROUTES_DATA;
   articleForm: FormGroup;
   coverPhoto: IOutPutData;
   newArticle: boolean;
@@ -59,7 +60,8 @@ export class ArticleManageComponent implements OnInit {
     private articleService: ArticleService,
     private snackBarService: SnackBarService,
     private profileService: ProfileService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loaderService: LoaderService
   ) {
   }
 
@@ -78,12 +80,14 @@ export class ArticleManageComponent implements OnInit {
     if (newArticle) {
       this.coverPhoto = file;
     } else {
+      this.loaderService.setLoaderStatus(true);
       this.articleService.addPhotoToTheStorage(file?.fileToUpload, this._id).pipe(
         switchMap((coverPhoto) => this.articleService.updateArticle(this._id, {
           coverPhoto,
           updatedAt: new Date().toISOString()
         }))
       ).subscribe(() => {
+        this.loaderService.setLoaderStatus(false);
         this.snackBarService.openSuccessSnackBar(SNACK_BAR.success.article_updated);
         this.router.navigate([ROUTES_DATA.PRIVATE.children.DASHBOARD.url]);
       });
@@ -94,18 +98,22 @@ export class ArticleManageComponent implements OnInit {
 
   publishArticle() {
     if (this.newArticle) {
+      this.loaderService.setLoaderStatus(true);
       this.articleService.createArticle({
         ...this.articleForm.value,
         createdAt: new Date().toISOString(),
         authorId: this.authorId
       }, this.coverPhoto.fileToUpload)
         .subscribe(() => {
+          this.loaderService.setLoaderStatus(false);
           this.snackBarService.openSuccessSnackBar(SNACK_BAR.success.article_created);
           this.router.navigate([ROUTES_DATA.PRIVATE.children.DASHBOARD.url]);
         })
     } else {
+      this.loaderService.setLoaderStatus(true);
       this.articleService.updateArticle(this._id, { ...this.articleForm.value, updatedAt: new Date().toISOString() })
         .subscribe(() => {
+          this.loaderService.setLoaderStatus(false);
           this.snackBarService.openSuccessSnackBar(SNACK_BAR.success.article_updated);
           this.router.navigate([ROUTES_DATA.PRIVATE.children.DASHBOARD.url]);
         })

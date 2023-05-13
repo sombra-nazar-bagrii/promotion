@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 import { IUser } from "@shared";
-import { ProfileService } from "@core";
 import { Observable } from "rxjs";
+import { UserService } from "@modules/private/profile/user.service";
 
 @Component({
   selector: 'promo-author-info',
@@ -15,11 +15,11 @@ export class AuthorInfoComponent implements OnInit {
   author$: Observable<IUser>;
 
   constructor(
-    private profileService: ProfileService
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
-    this.author$ = this.profileService.getUserById(this.authorId);
+    this.author$ = this.userService.getUserById(this.authorId);
   }
 
 }

@@ -19,6 +19,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() disabled = false;
   @Input() data: string;
   @Input() minlength = 0;
+  @Input() inputType: string | undefined;
   @Input() prefix = false;
 
   public onChangeFn = (_: any) => {};

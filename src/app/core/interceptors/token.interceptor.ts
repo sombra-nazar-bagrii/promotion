@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(1);
     /*const token: string | null = this.authService.getToken();
     if (token) {
       request = request.clone({

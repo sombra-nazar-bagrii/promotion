@@ -1,0 +1,30 @@
+<form
+  class="user-info"
+  *ngIf="userInfoForm"
+  [formGroup]="userInfoForm"
+  (ngSubmit)="updateUserData()"
+>
+  <h3 class="user-info__title">Change your information</h3>
+  <promo-input
+    formControlName="userName"
+    label="Name"
+    placeholder="Enter your name"
+  ></promo-input>
+  <promo-input
+    formControlName="age"
+    label="Age"
+    placeholder="Enter your age"
+  ></promo-input>
+
+  <div class="user-info__actions">
+    <promo-button tall variant="stroked">Cancel</promo-button>
+    <promo-button
+      tall
+      type="submit"
+      variant="flat"
+      [disabled]="userInfoForm.invalid"
+    >Update</promo-button>
+  </div>
+
+</form>
+

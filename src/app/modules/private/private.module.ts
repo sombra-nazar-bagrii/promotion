@@ -5,7 +5,6 @@ import { PrivateRoutingModule } from './private-routing.module';
 import { SharedModule } from "@shared";
 import { PrivateLayoutComponent } from './layout';
 
-
 @NgModule({
   declarations: [
     PrivateLayoutComponent,

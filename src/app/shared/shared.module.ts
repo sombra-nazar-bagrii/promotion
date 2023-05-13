@@ -24,6 +24,8 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatRippleModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { MatCardModule } from "@angular/material/card";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatTabsModule } from "@angular/material/tabs";
 
 export const MAT_MODULES = [
   MatButtonModule,
@@ -38,7 +40,9 @@ export const MAT_MODULES = [
   MatSidenavModule,
   MatRippleModule,
   MatSelectModule,
-  MatCardModule
+  MatCardModule,
+  MatAutocompleteModule,
+  MatTabsModule
 ];
 
 export const SHARED_MODULES = [

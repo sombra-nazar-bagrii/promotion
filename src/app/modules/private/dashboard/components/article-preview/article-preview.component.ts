@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
-import { IArticle, getEnumPropNameByValue, ArticleCategory } from "@shared";
+import { IArticle, getEnumPropNameByValue, ArticleCategory, ROUTES_DATA, SnackBarService, SNACK_BAR } from "@shared";
+import { ArticleService } from "@modules/private/article/article.service";
 
 @Component({
   selector: 'promo-article-preview',
@@ -9,27 +10,21 @@ import { IArticle, getEnumPropNameByValue, ArticleCategory } from "@shared";
 })
 export class ArticlePreviewComponent implements OnInit {
 
-  @Input() article: IArticle;
+  ROUTES_DATA = ROUTES_DATA;
 
-  constructor() { }
+  @Input() article: IArticle;
+  @Input() currentUserId: string;
+
+  constructor(
+    private articleService: ArticleService,
+    private snackBarService: SnackBarService
+  ) { }
 
   ngOnInit(): void {
   }
 
   getCategoryName = (category: ArticleCategory) => getEnumPropNameByValue(category, ArticleCategory);
 
-  getDisplayDate(publishDate: string): string {
-    const today = new Date();
-    const publishFormattedDate = new Date(publishDate)
-    const daysAgo = Math.floor((today.getTime() - publishFormattedDate.getTime()) / (1000 * 3600 * 24));
-
-    if (daysAgo === 0) {
-      return "today";
-    } else if (daysAgo <= 20) {
-      return `${daysAgo} days ago`;
-    } else {
-      return publishFormattedDate.toISOString();
-    }
-  }
-
+  removeArticle = (id: string) => this.articleService.removeArticle(id)
+    .subscribe(() => this.snackBarService.openSuccessSnackBar(SNACK_BAR.success.article_deleted));
 }

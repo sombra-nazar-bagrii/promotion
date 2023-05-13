@@ -2,9 +2,11 @@
 
 .article-preview {
   height: 100%;
+  position: relative;
 
   &__image {
-
+    min-height: 260px;
+    background-color: variables.$raven;
   }
 
   &__body {
@@ -30,5 +32,27 @@
       @include variables.truncate-text(4);
       margin-bottom: 10px;
     }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+    &__link {
+      color: variables.$dodgerBlue;
+      display: flex;
+      align-items: center;
+      column-gap: 6px;
+    }
+  }
+
+  &__control {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: variables.$pickledBluewood;
   }
 }

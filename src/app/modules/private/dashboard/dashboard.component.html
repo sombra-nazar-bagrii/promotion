@@ -1,5 +1,5 @@
 <section class="dashboard__wrapper">
-  <main class="dashboard__main">
+  <main class="dashboard__main" *ngLet="currentUser$ | async as current">
     <header class="dashboard__main__header">
       <h3>Articles Dashboard</h3>
       <promo-category-selector
@@ -14,6 +14,8 @@
       <div class="articles">
         <promo-article-preview
           *ngFor="let article of articles; trackBy: trackByFn"
+          @articleAnimation
+          [currentUserId]="current.uid"
           [article]="article"
         ></promo-article-preview>
       </div>
@@ -37,17 +39,18 @@
       ></ngx-skeleton-loader>
     </ng-template>
 
-
-
   </main>
   <aside class="dashboard__aside">
-    <a
-      mat-flat-button
-      class="float-right"
+    <promo-button
+      variant="flat"
+      class="dashboard__aside__add"
       [routerLink]="['../', ROUTES_DATA.PRIVATE.children.ARTICLE.url, 'manage', 'new']"
       >
       <mat-icon>add</mat-icon>
       Add Article
-    </a>
+    </promo-button>
+
+    <promo-weather-widget></promo-weather-widget>
+
   </aside>
 </section>

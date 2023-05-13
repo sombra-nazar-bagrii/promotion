@@ -1,0 +1,31 @@
+@use "variables";
+
+.user-avatar {
+   padding-top: 30px;
+
+   &__title {
+     padding-bottom: 20px;
+   }
+
+  &__preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+    &-image {
+      border-radius: 50%;
+      border: 1px solid variables.$dodgerBlue;
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+   &__actions {
+     padding-top: 20px;
+     display: flex;
+     justify-content: flex-start;
+     column-gap: 20px;
+     align-items: center;
+   }
+ }

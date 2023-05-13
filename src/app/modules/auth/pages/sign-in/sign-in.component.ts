@@ -21,7 +21,7 @@ export class SignInComponent {
   loginForm = this.fb.group({
     // EmailFormatValidator
     email: ['', Validators.required],
-    password: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   signInWithCredentials() {

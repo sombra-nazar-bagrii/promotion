@@ -3,7 +3,6 @@ import { ArticleService } from "../../article.service";
 import { switchMap, EMPTY } from "rxjs";
 import { ROUTES_DATA } from "@shared";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ProfileService } from "@core";
 
 @Component({
   selector: 'promo-article',

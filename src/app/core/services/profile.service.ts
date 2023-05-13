@@ -40,8 +40,4 @@ export class ProfileService {
   clearUserProfile() {
     this.currentUser$.next(null);
   }
-
-  getUserById(userId: string): Observable<IUser> {
-    return this.angularFirestore.doc<IUser>(`users/${userId}`).valueChanges();
-  }
 }
