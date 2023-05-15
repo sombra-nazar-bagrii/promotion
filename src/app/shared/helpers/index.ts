@@ -1,5 +1,3 @@
-
-
 export function isUndefined(value: string | number | boolean): boolean {
   return typeof value === 'undefined';
 }
@@ -18,7 +16,7 @@ export function deepFind(obj, path: string) {
 
   if (paths) {
     for (const p of paths) {
-      if (current[p] === undefined) {
+      if (current?.[p] === undefined) {
         return undefined;
       } else {
         current = current[p];
@@ -47,6 +45,6 @@ export function getEnumPropNameByValue(value: number, enumObj: any): string | un
   return enumKeys[index];
 }
 
-export function isNil(value: any): value is null | undefined {
+export function isNil(value: unknown): value is null | undefined {
   return value === null || typeof value === 'undefined';
 }

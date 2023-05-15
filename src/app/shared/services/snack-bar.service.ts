@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ISnackBarConf, IKeyValue } from "../interfaces";
-import { SnackBarComponent } from "../components";
+import { SnackBarComponent } from "../components/snack-bar";
 
 type snackBarTypes = 'success' | 'error' | 'info';
 

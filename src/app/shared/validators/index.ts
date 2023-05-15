@@ -22,7 +22,7 @@ export function ConfirmPasswordValidator(controlName: string, matchingControlNam
     const control = formGroup.controls[controlName];
     const matchingControl = formGroup.controls[matchingControlName];
     if (matchingControl.errors && !matchingControl.errors?.['confirmedValidator']) {
-      return;
+      return null;
     }
     if (control.value !== matchingControl.value) {
       matchingControl.setErrors({ confirmedValidator: true });

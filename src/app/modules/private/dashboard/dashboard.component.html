@@ -1,5 +1,5 @@
 <section class="dashboard__wrapper">
-  <main class="dashboard__main" *ngLet="currentUser$ | async as current">
+  <main class="dashboard__main" *ngIf="currentUser$ | async as current">
     <header class="dashboard__main__header">
       <h3>Articles Dashboard</h3>
       <promo-category-selector

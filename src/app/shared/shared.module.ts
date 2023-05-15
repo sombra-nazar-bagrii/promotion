@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SHARED_COMPONENTS } from './components';
-import { SHARED_DIRECTIVES } from './directives';
 import { SHARED_PIPES } from './pipes';
 
 import { MatButtonModule } from "@angular/material/button";
@@ -26,6 +24,35 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatCardModule } from "@angular/material/card";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatTabsModule } from "@angular/material/tabs";
+
+import { SnackBarComponent } from "./components/snack-bar";
+import { InputComponent } from "./components/input";
+import { ButtonComponent } from "./components/button";
+import { DividerComponent } from "./components/divider";
+import { IconComponent } from "./components/icon";
+import { UserAvatarComponent } from "./components/user-avatar";
+import { FileUploadComponent } from "./components/file-upload";
+import { ImageCropperComponent } from "./components/image-cropper";
+import { TextareaComponent } from "./components/textarea";
+import { BackLinkComponent } from "./components/back-link";
+import { AuthorInfoComponent } from "./components/author-info";
+import { ProgressSpinnerComponent } from "./components/progress-spinner";
+import { DndDirective, LetDirective } from "./directives";
+
+const SHARED_COMPONENTS = [
+  SnackBarComponent,
+  InputComponent,
+  ButtonComponent,
+  DividerComponent,
+  IconComponent,
+  UserAvatarComponent,
+  FileUploadComponent,
+  ImageCropperComponent,
+  TextareaComponent,
+  BackLinkComponent,
+  AuthorInfoComponent,
+  ProgressSpinnerComponent
+]
 
 export const MAT_MODULES = [
   MatButtonModule,
@@ -53,7 +80,12 @@ export const SHARED_MODULES = [
 ];
 
 @NgModule({
-  declarations: [...SHARED_DIRECTIVES, ...SHARED_COMPONENTS, ...SHARED_PIPES],
+  declarations: [
+    DndDirective,
+    LetDirective,
+    ...SHARED_COMPONENTS,
+    ...SHARED_PIPES
+  ],
   imports: [
     CommonModule,
     ...MAT_MODULES,
@@ -63,7 +95,8 @@ export const SHARED_MODULES = [
     ImageCropperModule,
   ],
   exports: [
-    ...SHARED_DIRECTIVES,
+    DndDirective,
+    LetDirective,
     ...SHARED_COMPONENTS,
     ...SHARED_PIPES,
     ...SHARED_MODULES,
