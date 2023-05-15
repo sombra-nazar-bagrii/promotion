@@ -13,6 +13,5 @@ export class DateViewPipe implements PipeTransform {
       if (daysAgo === 0) return "today";
       if (daysAgo <= 20) return `${daysAgo} days ago`;
       return publishFormattedDate.toISOString();
-
     }
 }

@@ -27,7 +27,7 @@ export class SnackBarService {
   }
 
   // configuration and show snackbar
-  openSnackBar(type: snackBarTypes, title: string, message: string) {
+  private openSnackBar(type: snackBarTypes, title: string, message: string) {
     this.snackBar.openFromComponent(SnackBarComponent, {
       duration: 10_000,
       horizontalPosition: 'right',
