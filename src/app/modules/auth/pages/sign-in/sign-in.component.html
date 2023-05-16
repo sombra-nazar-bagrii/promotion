@@ -8,20 +8,23 @@
 
   <form [formGroup]="loginForm" (submit)="signInWithCredentials()">
     <promo-input
+      data-test="login-email"
       formControlName="email"
       label="Email address"
       placeholder="Enter your email address"
     ></promo-input>
     <promo-input
+      data-test="login-password"
       formControlName="password"
       label="Password"
       placeholder="Enter your password"
       inputType="password"
     ></promo-input>
 
-    <a [routerLink]="['../', ROUTES_DATA.AUTH.children.FORGOT_PASSWORD.url]">Forgot your password?</a>
+    <a data-test="login-reset-pass-link" [routerLink]="['../', ROUTES_DATA.AUTH.children.FORGOT_PASSWORD.url]">Forgot your password?</a>
 
     <promo-button
+      data-test="login-submit"
       variant="flat"
       class="sign-in__submit"
       tall
@@ -55,7 +58,7 @@
   </div>
 
   <p class="sign-in__registration">
-    Don’t have an account? <a [routerLink]="['../', ROUTES_DATA.AUTH.children.SIGN_UP.url]">Sign Up</a>
+    Don’t have an account? <a data-test="login-reg-link" [routerLink]="['../', ROUTES_DATA.AUTH.children.SIGN_UP.url]">Sign Up</a>
   </p>
 
 </section>

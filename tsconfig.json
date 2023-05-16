@@ -16,6 +16,7 @@
     "target": "es2020",
     "resolveJsonModule": true,
     "outDir": "./dist/out-tsc",
+    "types": ["cypress", "cypress-file-upload"],
 
     "paths": {
       "@env": ["src/environments/environment"],
@@ -24,6 +25,9 @@
       "@modules/*": ["src/app/modules/*"]
     }
   },
+  "exclude": [
+    "./cypress.config.ts"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

@@ -8,6 +8,7 @@
   <form *ngIf="articleForm" [formGroup]="articleForm" class="article" (ngSubmit)="publishArticle()">
     <h2>{{ newArticle ? 'Add new article' : 'Edit article' }}</h2>
     <promo-input
+      data-test="manage-article-title"
       formControlName="title"
       label="Title"
       placeholder="Enter your title"
@@ -18,7 +19,7 @@
       floatLabel="never"
       appearance="outline"
     >
-      <mat-select formControlName="category">
+      <mat-select data-test="manage-article-category" formControlName="category">
         <mat-option *ngFor="let category of categoryOptions" [value]="category.id">
           {{ category.name | titlecase }}
         </mat-option>
@@ -26,6 +27,7 @@
     </mat-form-field>
 
     <promo-textarea
+      data-test="manage-article-body"
       formControlName="body"
       label="Text"
       placeholder="Enter your text"
@@ -35,6 +37,7 @@
     <img
       *ngIf="photoPreview"
       [src]="photoPreview"
+      data-test="manage-article-photo"
       alt="cover photo"
       class="article__photo-preview"
     >
@@ -44,8 +47,15 @@
       (fileEvent)="onCoverPhotoUpload($event, newArticle)"
     ></promo-file-upload>
 
-    <promo-button>Cancel</promo-button>
-    <promo-button variant="flat" type="submit">{{ newArticle ? 'Publish' : 'Update'}}</promo-button>
+    <promo-button
+      [routerLink]="['./', ROUTES_DATA.PRIVATE.children.DASHBOARD.url]"
+    >Cancel</promo-button>
+    <promo-button
+      [disabled]="articleForm.invalid || !coverPhoto"
+      data-test="manage-article-submit"
+      variant="flat"
+      type="submit"
+    >{{ newArticle ? 'Publish' : 'Update'}}</promo-button>
 
   </form>
 </ng-container>

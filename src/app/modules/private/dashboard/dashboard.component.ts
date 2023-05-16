@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
   loadMoreCount = 10;
   showCount$ = new BehaviorSubject<number>(10);
   category$ = new BehaviorSubject<ArticleCategory | null>(null);
-  sorting$ = new BehaviorSubject<boolean>(true);
+  sorting$ = new BehaviorSubject<boolean>(false);
   ROUTES_DATA = ROUTES_DATA;
 
   currentUser$ = this.profileService.getCurrentUser();

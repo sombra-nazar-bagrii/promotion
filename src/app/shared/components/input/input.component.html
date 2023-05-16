@@ -2,7 +2,7 @@
   <label class="input__label">{{label}}</label>
   <mat-form-field floatLabel="never" appearance="outline" [class.error]="showError && control.errors">
     <input
-      type="text"
+      [type]="inputType"
       matInput
       #input
       [required]="required"

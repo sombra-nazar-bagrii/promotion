@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Validators, FormBuilder } from "@angular/forms";
-import { ROUTES_DATA } from "@shared";
+import { ROUTES_DATA, EmailFormatValidator } from "@shared";
 import { AuthService } from "@core";
 
 @Component({
@@ -19,8 +19,7 @@ export class SignInComponent {
   ) { }
 
   loginForm = this.fb.group({
-    // EmailFormatValidator
-    email: ['', Validators.required],
+    email: ['', Validators.compose([Validators.required, EmailFormatValidator])],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 

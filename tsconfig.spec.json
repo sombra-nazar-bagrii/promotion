@@ -5,7 +5,10 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine",
-      "jest"
+      "jest",
+      "node",
+      "cypress",
+      "cypress-file-upload"
     ]
   },
   "files": [

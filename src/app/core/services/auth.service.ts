@@ -66,10 +66,11 @@ export class AuthService {
         result.user.sendEmailVerification(),
         this.setUserData(result.user, userDetails)
       ]),
+      switchMap(() => this.profileService.invokeUserProfile()),
     ).subscribe(() => {
       this.loaderService.setLoaderStatus(false);
       this.snackBarService.openSuccessSnackBar(SNACK_BAR.success.account_created);
-      this.router.navigate([ROUTES_DATA.AUTH.children.SIGN_IN.url])
+      this.router.navigate([ROUTES_DATA.PRIVATE.children.DASHBOARD.url])
     });
   }
 

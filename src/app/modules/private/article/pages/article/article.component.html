@@ -4,7 +4,7 @@
 ></promo-back-link>
 
 
-<article class="article" *ngIf="article$ | async as article else loading">
+<article data-test="article-view-card" class="article" *ngIf="article$ | async as article else loading">
   <div class="article__main-wrapper">
     <img
       [src]="article.coverPhoto"

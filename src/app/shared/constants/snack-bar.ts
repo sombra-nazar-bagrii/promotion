@@ -17,6 +17,10 @@ export const SNACK_BAR = {
         key: 'Whoops',
         value: 'Please check correctness of entered data',
       },
+      email_already_in_use: {
+        key: 'Whoops',
+        value: 'The email address is already in use by another account.',
+      }
     },
     SERVER_ERROR: {
       key: 'Something went wrong!',

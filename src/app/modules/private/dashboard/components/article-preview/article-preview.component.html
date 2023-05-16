@@ -1,4 +1,4 @@
-<mat-card class="article-preview" *ngIf="article">
+<mat-card data-test="article-preview" class="article-preview" *ngIf="article">
   <img class="article-preview__image" mat-card-image [src]="article.coverPhoto" alt="Article photo">
   <mat-card-content class="article-preview__body">
     <div class="info-row">
@@ -23,6 +23,7 @@
   <promo-button
     *ngIf="article.authorId === currentUserId"
     [matMenuTriggerFor]="menu"
+    data-test="article-preview-manage"
     class="article-preview__control"
     variant="icon"
   ><mat-icon>more_horiz</mat-icon></promo-button>
@@ -33,6 +34,7 @@
     >Edit</button>
     <button
       mat-menu-item
+      data-test="article-preview-remove"
       (click)="removeArticle(article.id)"
     >Delete</button>
   </mat-menu>

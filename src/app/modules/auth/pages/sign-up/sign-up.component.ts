@@ -32,7 +32,7 @@ export class SignUpComponent implements OnInit {
 
   private _buildForm() {
     this.registerForm = this.fb.group({
-      name: ['', Validators.required],
+      displayName: ['', Validators.required],
       age: ['', Validators.required],
       // EmailFormatValidator
       email: ['', Validators.compose([Validators.required])],

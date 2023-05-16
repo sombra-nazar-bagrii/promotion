@@ -11,7 +11,7 @@
     </header>
 
     <ng-container *ngIf="articles$ | async as articles; else loading">
-      <div class="articles">
+      <div class="articles" data-test="articles-list">
         <promo-article-preview
           *ngFor="let article of articles; trackBy: trackByFn"
           @articleAnimation
@@ -21,6 +21,7 @@
       </div>
 
       <promo-button
+        data-test="load-more-articles-btn"
         *ngIf="!(articles.length % 10) && articles.length !== 0"
         (click)="showCount$.next(showCount$.value + loadMoreCount)"
       >Load more</promo-button>
@@ -42,6 +43,7 @@
   </main>
   <aside class="dashboard__aside">
     <promo-button
+      data-test="add-new-article-btn"
       variant="flat"
       class="dashboard__aside__add"
       [routerLink]="['../', ROUTES_DATA.PRIVATE.children.ARTICLE.url, 'manage', 'new']"

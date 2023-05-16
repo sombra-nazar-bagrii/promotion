@@ -7,11 +7,13 @@
   <form *ngIf="registerForm" [formGroup]="registerForm" (submit)="signUpWithCredentials()">
     <div class="sign-up__field-group">
       <promo-input
-        formControlName="name"
+        data-test="reg-name"
+        formControlName="displayName"
         label="Name"
         placeholder="Enter your name"
       ></promo-input>
       <promo-input
+        data-test="reg-age"
         formControlName="age"
         label="Age"
         placeholder="Enter your age"
@@ -19,17 +21,20 @@
     </div>
 
     <promo-input
+      data-test="reg-email"
       formControlName="email"
       label="Email address"
       placeholder="Enter your email address"
     ></promo-input>
     <promo-input
+      data-test="reg-password"
       formControlName="password"
       label="Password"
       placeholder="Enter your password"
       inputType="password"
     ></promo-input>
     <promo-input
+      data-test="reg-confirmPassword"
       formControlName="confirmPassword"
       label="Confirm New Password"
       placeholder="Enter your new password again"
@@ -38,6 +43,7 @@
 
     <promo-button
       variant="flat"
+      data-test="reg-submit"
       class="sign-up__submit"
       tall
       type="submit"

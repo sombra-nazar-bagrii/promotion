@@ -1,0 +1,5 @@
+{
+  "weatherDate": "[data-test='weather-date']",
+  "weatherLocation": "[data-test='weather-location']",
+  "weatherMenu": "[data-test='weather-menu']"
+}
