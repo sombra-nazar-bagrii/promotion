@@ -31,6 +31,7 @@
     {
       "name": "api",
       "urls": [
+        "https://api.openweathermap.org",
         "https://firestore.googleapis.com/**",
         "https://identitytoolkit.googleapis.com/**"
       ],
