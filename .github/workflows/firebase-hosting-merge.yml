@@ -19,9 +19,11 @@ jobs:
         with:
           node-version: 16
 
-      # Install Angular CLI
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli
+      # Install Angular CLI and dependencies
+      - name: Install Angular CLI and dependencies
+        run: |
+          npm install -g @angular/cli
+          npm install
 
       # Run unit tests
       - name: Unit run
