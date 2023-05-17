@@ -13,8 +13,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Unit tests run
-      - run: npm run ci-test
+      - name: Unit run
+        id: unit
+        run: npm run ci-test
+
   cypress-run:
     runs-on: ubuntu-22.04
     steps:
