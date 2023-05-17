@@ -5,6 +5,7 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { FormControl } from "@angular/forms";
 import { IArticle, ROUTES_DATA, LoaderService } from "@shared";
 import { ArticleService } from "@modules/private/article/article.service";
+import { environment } from "@env";
 
 @Component({
   selector: 'promo-private-layout',
@@ -14,6 +15,7 @@ import { ArticleService } from "@modules/private/article/article.service";
 })
 export class PrivateLayoutComponent implements OnInit {
 
+  version = environment.version;
   navItems: { link: string, title: string, icon: string }[] = [
     {
       link: ROUTES_DATA.PRIVATE.children.DASHBOARD.url,

@@ -1,7 +1,7 @@
 
 <section class="private" *ngIf="currentUser$ | async as current">
   <header class="private__header">
-    <div class="private__header__logo"></div>
+    <div [matTooltip]="version" class="private__header__logo"></div>
     <div class="private__header__body">
       <mat-form-field class="article-search" floatLabel="never" appearance="outline">
         <mat-icon class="article-search__prefix" matPrefix>search</mat-icon>

@@ -15,7 +15,8 @@ export const environment = {
     measurementId: 'G-9G73QYQFRV',
   },
   production: false,
-  weatherApiKay: '3959a3a646206e83b6745bb08edd498c'
+  weatherApiKay: '3959a3a646206e83b6745bb08edd498c',
+  version: '0.0.1'
 };
 
 /*
