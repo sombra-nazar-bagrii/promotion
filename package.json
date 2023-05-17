@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "start-pwa": "ng build && http-server -p 8080 -c-1 dist/promotion-t",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -22,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/platform-server": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@angular/service-worker": "^14.2.0",
     "@ng-select/ng-select": "^9.0.2",
     "@nguniversal/express-engine": "^14.1.0",
     "@types/quill": "^2.0.9",
@@ -49,6 +51,7 @@
     "@types/jasmine": "~4.0.0",
     "@types/jest": "^29.5.1",
     "@types/node": "^18.7.14",
+    "cypress": "^12.12.0",
     "husky": "^8.0.1",
     "jasmine-core": "~4.2.0",
     "jasmine-marbles": "^0.9.0",
@@ -57,7 +60,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "cypress": "^12.12.0",
     "prettier": "2.7.1",
     "pretty-quick": "^3.1.3",
     "typescript": "~4.7.3"
