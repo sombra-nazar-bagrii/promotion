@@ -20,6 +20,7 @@ jobs:
           build: npm run build
           start: npm start
   build_and_deploy:
+    needs: cypress-run
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
