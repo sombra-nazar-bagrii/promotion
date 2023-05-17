@@ -38,6 +38,7 @@ import { BackLinkComponent } from "./components/back-link";
 import { AuthorInfoComponent } from "./components/author-info";
 import { ProgressSpinnerComponent } from "./components/progress-spinner";
 import { DndDirective, LetDirective } from "./directives";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 const SHARED_COMPONENTS = [
   SnackBarComponent,
@@ -69,7 +70,8 @@ export const MAT_MODULES = [
   MatSelectModule,
   MatCardModule,
   MatAutocompleteModule,
-  MatTabsModule
+  MatTabsModule,
+  MatTooltipModule
 ];
 
 export const SHARED_MODULES = [
