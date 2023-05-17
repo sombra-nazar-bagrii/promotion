@@ -13,6 +13,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      # Install Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      # Install Angular CLI
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
+      # Run unit tests
       - name: Unit run
         id: unit
         run: npm run ci-test
