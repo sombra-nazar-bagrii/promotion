@@ -1,0 +1,14 @@
+.category-selector {
+  display: flex;
+  column-gap: 6px;
+  align-items: center;
+
+  &__prefix {
+    font-size: 14px;
+    color: rgba(111, 124, 139, 0.5);
+  }
+
+  &__icon {
+    color: rgba(111, 124, 139, 0.5);
+  }
+}

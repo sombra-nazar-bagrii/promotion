@@ -1,0 +1,30 @@
+<ng-container [ngSwitch]="variant">
+  <ng-container *ngSwitchCase="'flat'">
+    <button [type]="type" [color]="color" [disabled]="disabled" mat-flat-button>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchCase="'stroked'">
+    <button
+      [type]="type"
+      [color]="color"
+      [disabled]="disabled"
+      mat-stroked-button>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchCase="'icon'">
+    <button [type]="type" [color]="color" [disabled]="disabled" mat-icon-button>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <button [type]="type" [color]="color" [disabled]="disabled" mat-button>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </button>
+  </ng-container>
+</ng-container>
+
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>

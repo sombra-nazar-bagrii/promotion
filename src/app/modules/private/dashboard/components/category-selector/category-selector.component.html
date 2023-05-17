@@ -1,0 +1,21 @@
+<div class="category-selector">
+  <span class="category-selector__prefix">Show:</span>
+  <button data-test="category-selector" mat-button [matMenuTriggerFor]="menu">{{ selectedCategory }}
+    <mat-icon class="category-selector__icon">expand_more</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button
+      (click)="selectionChange(allCategoryOption)"
+      mat-menu-item
+    >{{ allCategoryOption.name }}</button>
+    <button
+      *ngFor="let category of categoryOptions"
+      [attr.data-test]="'category_' + category.name"
+      (click)="selectionChange(category)"
+      mat-menu-item
+    >{{ category.name | titlecase }}</button>
+
+  </mat-menu>
+</div>
+

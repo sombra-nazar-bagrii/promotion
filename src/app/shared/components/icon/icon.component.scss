@@ -1,0 +1,17 @@
+:host {
+  display: inline-flex;
+
+  &[size='auto'] {
+    mat-icon {
+      height: auto;
+      width: auto;
+    }
+  }
+
+  &[size='fit'] {
+    mat-icon {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

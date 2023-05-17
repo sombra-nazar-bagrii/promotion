@@ -1,0 +1,58 @@
+<section class="dashboard__wrapper">
+  <main class="dashboard__main" *ngIf="currentUser$ | async as current">
+    <header class="dashboard__main__header">
+      <h3>Articles Dashboard</h3>
+      <promo-category-selector
+        (onCategoryChange)="category$.next($event)"
+      ></promo-category-selector>
+      <promo-sorting-selector
+        (onSortingChange)="sorting$.next($event)"
+      ></promo-sorting-selector>
+    </header>
+
+    <ng-container *ngIf="articles$ | async as articles; else loading">
+      <div class="articles" data-test="articles-list">
+        <promo-article-preview
+          *ngFor="let article of articles; trackBy: trackByFn"
+          @articleAnimation
+          [currentUserId]="current.uid"
+          [article]="article"
+        ></promo-article-preview>
+      </div>
+
+      <promo-button
+        data-test="load-more-articles-btn"
+        *ngIf="!(articles.length % 10) && articles.length !== 0"
+        (click)="showCount$.next(showCount$.value + loadMoreCount)"
+      >Load more</promo-button>
+
+      <div *ngIf="articles.length === 0">
+        No articles...
+      </div>
+
+    </ng-container>
+
+    <ng-template #loading>
+      <ngx-skeleton-loader
+        count="10"
+        appearance="line"
+        [theme]="{ height: '40px' }"
+      ></ngx-skeleton-loader>
+    </ng-template>
+
+  </main>
+  <aside class="dashboard__aside">
+    <promo-button
+      data-test="add-new-article-btn"
+      variant="flat"
+      class="dashboard__aside__add"
+      [routerLink]="['../', ROUTES_DATA.PRIVATE.children.ARTICLE.url, 'manage', 'new']"
+      >
+      <mat-icon>add</mat-icon>
+      Add Article
+    </promo-button>
+
+    <promo-weather-widget></promo-weather-widget>
+
+  </aside>
+</section>

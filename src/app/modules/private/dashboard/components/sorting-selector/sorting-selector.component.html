@@ -1,0 +1,18 @@
+
+<div class="sorting-selector" matRipple [matMenuTriggerFor]="menu">
+  <span class="sorting-selector__prefix">Sort by:</span>
+  <span class="sorting-selector__applied">{{ selectedOrder }}</span>
+  <mat-icon class="sorting-selector__icon">expand_more</mat-icon>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button
+    (click)="setSortOrder()"
+    mat-menu-item
+  >Ascending</button>
+  <button
+    (click)="setSortOrder(false)"
+    mat-menu-item
+  >Descending</button>
+</mat-menu>
+

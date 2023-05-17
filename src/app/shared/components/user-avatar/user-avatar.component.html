@@ -1,0 +1,12 @@
+<img
+  *ngIf="avatarPath"
+  [ngStyle]="{ width: avatarSize + 'px', height: avatarSize + 'px' }"
+  [src]="avatarPath"
+  class="user-logo"
+  alt="user logo"/>
+<mat-icon
+  *ngIf="!avatarPath"
+  [style.font-size]="avatarSize + 'px'"
+  class="user-logo__placeholder"
+>account_circle
+</mat-icon>

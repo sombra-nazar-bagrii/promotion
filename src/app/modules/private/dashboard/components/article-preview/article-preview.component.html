@@ -1,0 +1,41 @@
+<mat-card data-test="article-preview" class="article-preview" *ngIf="article">
+  <img class="article-preview__image" mat-card-image [src]="article.coverPhoto" alt="Article photo">
+  <mat-card-content class="article-preview__body">
+    <div class="info-row">
+      <span>
+        {{ getCategoryName(article.category) | uppercase }}
+      </span>
+      <span>{{ article.createdAt | dateView }}</span>
+    </div>
+
+    <h2 class="article-preview__body__title">{{ article.title }}</h2>
+    <p class="article-preview__body__text">{{ article.body }}</p>
+
+  </mat-card-content>
+  <mat-card-actions class="article-preview__footer">
+    <promo-author-info [authorId]="article.authorId"></promo-author-info>
+    <a
+      class="article-preview__footer__link"
+      [routerLink]="['../', ROUTES_DATA.PRIVATE.children.ARTICLE.url ,article.id]"
+    >Read more <mat-icon>arrow_forward</mat-icon></a>
+  </mat-card-actions>
+
+  <promo-button
+    *ngIf="article.authorId === currentUserId"
+    [matMenuTriggerFor]="menu"
+    data-test="article-preview-manage"
+    class="article-preview__control"
+    variant="icon"
+  ><mat-icon>more_horiz</mat-icon></promo-button>
+  <mat-menu #menu="matMenu">
+    <button
+      mat-menu-item
+      [routerLink]="['../', ROUTES_DATA.PRIVATE.children.ARTICLE.url, 'manage' ,article.id]"
+    >Edit</button>
+    <button
+      mat-menu-item
+      data-test="article-preview-remove"
+      (click)="removeArticle(article.id)"
+    >Delete</button>
+  </mat-menu>
+</mat-card>

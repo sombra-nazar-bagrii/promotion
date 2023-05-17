@@ -1,0 +1,8 @@
+@use "variables";
+
+.author-info {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+  color: variables.$dodgerBlue;
+}

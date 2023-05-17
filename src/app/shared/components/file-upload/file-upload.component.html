@@ -1,0 +1,26 @@
+<section>
+  <promo-button
+    dense
+    class="upload"
+    uiDnd
+    (fileDropped)="onFileDropped($event)">
+    <label class="upload-label">
+      <div class="upload-title">
+        <mat-icon class="upload-title__icon">cloud_upload</mat-icon>
+        <span class="upload-title__formats">{{ getInputAcceptTypesForView() | uppercase }}</span>
+        <span class="upload-title__info">Upload file by click here or drag and drop</span>
+      </div>
+      <input
+        data-test="photo-input"
+        #fileInput
+        class="upload-input"
+        type="file"
+        [accept]="getInputAcceptTypes()"
+        [multiple]="false"
+        (change)="fileChangeEvent($event)" />
+    </label>
+  </promo-button>
+
+  <small class="maxSize">Max file size {{ fileSizeLimitMB }} MB</small>
+</section>
+

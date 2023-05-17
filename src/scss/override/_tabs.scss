@@ -1,0 +1,12 @@
+@use "variables";
+
+.promo {
+  .mat-tab-group.mat-primary .mat-ink-bar {
+    background-color: variables.$blueRibbon;
+  }
+
+  .mat-tab-label-active {
+    color: variables.$blueRibbon;
+    opacity: 1;
+  }
+}

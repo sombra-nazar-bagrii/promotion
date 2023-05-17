@@ -1,0 +1,46 @@
+<div class="input__wrapper">
+  <label class="input__label">{{label}}</label>
+  <mat-form-field floatLabel="never" appearance="outline" [class.error]="showError && control.errors">
+    <input
+      [type]="inputType"
+      matInput
+      #input
+      [required]="required"
+      [disabled]="disabled"
+      [minlength]="minlength"
+      [placeholder]="placeholder"
+      [(ngModel)]="data"
+      [ngModelOptions]="{standalone: true}"
+      (input)="onChange()"
+      (change)="onChange()"
+      (blur)="onTouchedFn()"/>
+    <ng-container *ngIf="showError">
+      <mat-error *ngIf="control.hasError('required')">Please fill the field</mat-error>
+      <mat-error *ngIf="control.hasError('confirmedValidator')">Passwords should match</mat-error>
+      <mat-error *ngIf="control.hasError('emailFormat')">Invalid email address</mat-error>
+      <mat-error *ngIf="control.hasError('minlength')">
+        <ng-container *ngIf="control.getError('minlength') as error">
+          Field should be at least {{ error.requiredLength }} chars length
+        </ng-container>
+      </mat-error>
+    </ng-container>
+    <span *ngIf="prefix" matPrefix>
+      <ng-content select="[prefix]"></ng-content>
+    </span>
+    <span matSuffix>
+    <ng-container *ngIf="inputType === 'password'">
+      <button
+        mat-icon-button
+        type="button"
+        (click)="input.type = input.type === 'password' ? 'text' : 'password'">
+        <mat-icon *ngIf="input.type === 'password'">
+          visibility
+        </mat-icon>
+        <mat-icon *ngIf="input.type === 'text'">
+          visibility_off
+        </mat-icon>
+      </button>
+    </ng-container>
+    </span>
+  </mat-form-field>
+</div>

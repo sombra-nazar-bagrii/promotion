@@ -1,0 +1,13 @@
+@import '~normalize.css';
+@import '~@angular/material/theming';
+@import '~@ng-select/ng-select/themes/material.theme.css';
+
+// quill text editor styles
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+
+@import 'theme';
+@import 'base';
+@import 'variables';
+@import 'override';

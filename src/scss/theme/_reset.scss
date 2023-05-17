@@ -1,0 +1,30 @@
+@mixin promo-theme-reset($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+
+  html,
+  body {
+    height: 100%;
+  }
+  * {
+    box-sizing: border-box;
+  }
+
+  a {
+    font-size: 16px;
+    text-decoration: none;
+    color: #4C6FFF;
+    &:visited {
+      color: #4C6FFF;
+    }
+  }
+
+  button,
+  button[type='button'],
+  button[type='submit'],
+  [type='button'],
+  [type='submit'] {
+    appearance: none;
+  }
+}

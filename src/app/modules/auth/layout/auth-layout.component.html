@@ -1,0 +1,13 @@
+<ng-container>
+  <div class="layout-auth">
+    <section
+      *ngLet="authImagType$ | async as imageClass"
+      [class]="'layout-auth__image ' + imageClass"
+    ></section>
+    <section class="layout-auth__content">
+      <router-outlet></router-outlet>
+    </section>
+    <promo-progress-spinner
+      [display]="loader$ | async"></promo-progress-spinner>
+  </div>
+</ng-container>

@@ -1,0 +1,66 @@
+
+<section class="private" *ngIf="currentUser$ | async as current">
+  <header class="private__header">
+    <div class="private__header__logo"></div>
+    <div class="private__header__body">
+      <mat-form-field class="article-search" floatLabel="never" appearance="outline">
+        <mat-icon class="article-search__prefix" matPrefix>search</mat-icon>
+        <input
+          type="text"
+          matInput
+          placeholder="Find articles..."
+          [formControl]="searchControl"
+          [matAutocomplete]="auto"
+        >
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions$ | async; trackBy: trackByFn">
+            <a class="article-search__option" [routerLink]="['../', ROUTES_DATA.PRIVATE.children.ARTICLE.url, option.id]">{{ option.title }}</a>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div class="user-info" [matMenuTriggerFor]="menu">
+        <uzhosts-user-avatar [avatarPath]="current.photoURL"></uzhosts-user-avatar>
+        <p class="user-info__name">{{ current.userName }}</p>
+        <mat-icon>expand_more</mat-icon>
+      </div>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button [routerLink]="['../', ROUTES_DATA.PRIVATE.children.PROFILE.url]" mat-menu-item>Edit Profile</button>
+        <button (click)="signOut()" mat-menu-item>Log out</button>
+      </mat-menu>
+    </div>
+  </header>
+  <mat-drawer-container class="private__container">
+    <mat-drawer class="private__container__nav" mode="side" opened>
+      <span class="private__container__nav__title">Main Menu</span>
+      <nav>
+        <a
+          *ngFor="let item of navItems"
+          class="private__container__nav__item"
+          [routerLink]="['./', item.link]"
+          routerLinkActive="active"
+        >
+          <mat-icon>{{ item.icon }}</mat-icon>
+          {{ item.title }}</a>
+      </nav>
+      <div class="private__container__nav__divider"></div>
+
+      <promo-button
+        data-test="profile-logout-btn"
+        class="private__container__nav__logout"
+        (click)="signOut()"
+      >
+        <mat-icon>logout</mat-icon>
+        Logout
+      </promo-button>
+
+    </mat-drawer>
+    <mat-drawer-content class="private__container__body">
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+  <promo-progress-spinner
+    [display]="loader$ | async"></promo-progress-spinner>
+</section>
+

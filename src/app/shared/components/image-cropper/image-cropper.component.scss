@@ -1,0 +1,10 @@
+.cropper {
+  max-width: 600px;
+  max-height: 750px;
+
+  &-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
