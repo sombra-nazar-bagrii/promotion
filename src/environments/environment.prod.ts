@@ -12,5 +12,5 @@ export const environment = {
   },
   production: true,
   weatherApiKay: '3959a3a646206e83b6745bb08edd498c',
-  version: '0.0.2'
+  version: '0.0.3'
 };
