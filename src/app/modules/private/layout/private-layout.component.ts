@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AuthService, ProfileService } from "@core";
-import { Observable, startWith, switchMap } from "rxjs";
+import { Observable, startWith, switchMap, tap, filter } from "rxjs";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { FormControl } from "@angular/forms";
-import { IArticle, ROUTES_DATA, LoaderService } from "@shared";
+import { IArticle, ROUTES_DATA, LoaderService, isUndefined } from "@shared";
 import { ArticleService } from "@modules/private/article/article.service";
 import { environment } from "@env";
 
@@ -32,10 +32,7 @@ export class PrivateLayoutComponent implements OnInit {
   loader$ = this.loaderService.getLoader$;
   currentUser$ = this.profileService.getCurrentUser();
   searchControl = new FormControl();
-  filteredOptions$: Observable<IArticle[]> = this.searchControl.valueChanges.pipe(
-    startWith(''),
-    switchMap(search => this.articleService.searchArticle(search))
-  );
+  filteredOptions$: Observable<IArticle[]>;
 
   constructor(
     private authService: AuthService,
@@ -47,6 +44,12 @@ export class PrivateLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.filteredOptions$ = this.searchControl.valueChanges.pipe(
+      startWith(''),
+      filter(search => !isUndefined(search)),
+      tap((c) => console.log(c)),
+      switchMap(search => this.articleService.searchArticle(search))
+    );
   }
 
   trackByFn(index: number, article: IArticle) {

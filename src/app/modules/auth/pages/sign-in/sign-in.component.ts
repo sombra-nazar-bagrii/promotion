@@ -19,7 +19,8 @@ export class SignInComponent {
   ) { }
 
   loginForm = this.fb.group({
-    email: ['', Validators.compose([Validators.required, EmailFormatValidator])],
+    // TODO EmailFormatValidator
+    email: ['', Validators.compose([Validators.required])],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
@@ -30,6 +31,4 @@ export class SignInComponent {
 
   signInWithFacebook = this.authService.fbAuth;
   signInWithGoogle = this.authService.googleAuth;
-
-
 }

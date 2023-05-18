@@ -60,10 +60,12 @@ export class FileUploadComponent {
     });
 
     imageCropper.afterClosed().subscribe((data) => {
-      this.fileEvent.emit({
-        base64: data.croppedImage || null,
-        fileToUpload: data.file,
-      });
+      if (data) {
+        this.fileEvent.emit({
+          base64: data.croppedImage || null,
+          fileToUpload: data.file,
+        });
+      }
       this.fileInput.nativeElement.value = '';
       this.changeDetectorRef.markForCheck();
     });
