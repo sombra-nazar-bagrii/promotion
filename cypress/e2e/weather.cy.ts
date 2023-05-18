@@ -1,7 +1,6 @@
 describe('Weather widget', function () {
 
   beforeEach(() => {
-    cy.visit('/');
     cy.fixture('auth').then(auth => cy.promo_login(auth.email, auth.password));
   });
 

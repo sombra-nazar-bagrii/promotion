@@ -1,8 +1,4 @@
 describe('User auth', () => {
-  beforeEach(() => {
-    cy.visit('/');
-  })
-
   describe('Reset password page', () => {
     beforeEach(() => cy.fixture('auth').then((auth) => cy.get(auth.path.login.forgotPassLink).click()));
 
@@ -41,7 +37,9 @@ describe('User auth', () => {
         cy.get(auth.path.login.passwordField).click();
 
         cy.get(`${auth.path.login.submitBtn} button`).should('be.disabled');
-        cy.get(auth.path.login.emailField).contains('Please fill the field').type('invalid');
+        cy.get(auth.path.login.emailField)
+          .contains('Please fill the field')
+          .type('invalid');
 
         cy.get(`${auth.path.login.submitBtn} button`).should('be.disabled');
         cy.get(auth.path.login.emailField).contains('Invalid email address');
