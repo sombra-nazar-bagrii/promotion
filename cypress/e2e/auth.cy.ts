@@ -1,6 +1,6 @@
 describe('User auth', () => {
   describe('Reset password page', () => {
-    beforeEach(() => cy.fixture('auth').then((auth) => cy.get(auth.path.login.forgotPassLink).click()));
+    beforeEach(() => cy.visit('/').then(() => cy.fixture('auth').then((auth) => cy.get(auth.path.login.forgotPassLink).click())));
 
     it('Verify that user unable to trigger email for not registered user', () => {
       cy.fixture('auth').then(data => {
@@ -30,6 +30,8 @@ describe('User auth', () => {
   });
 
   describe('Login page', () => {
+    beforeEach(() => cy.visit('/'));
+
     it('Verify that user unable to login with invalid credentials', () => {
       cy.fixture('auth').then(data => {
         cy.promo_login(data.email, '000000');
@@ -87,8 +89,10 @@ describe('User auth', () => {
     const password = Math.random().toString(36).slice(-8);
     const notTheSamePassword = Math.random().toString(36).slice(-8);
 
-    beforeEach(() => cy.fixture('auth')
-      .then((auth) => cy.get(auth.path.login.regLink).click()));
+    beforeEach(() => cy.visit('/')
+      .then(() => cy.fixture('auth')
+      .then((auth) => cy.get(auth.path.login.regLink).click())
+      ));
 
     it('Verify validation for name and age fields', function () {
       cy.fixture('auth').then((auth) => {
