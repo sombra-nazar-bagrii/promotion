@@ -5,20 +5,28 @@ describe('Articles', () => {
   });
 
   describe('Add new article', () => {
-    beforeEach(() => cy.fixture('article').then(article => cy.get(article.addNewArticleBtn).click()));
+    beforeEach(() => cy.fixture('article')
+      .then(article => cy.get(article.addNewArticleBtn).click()));
 
     it('Verify title form validation rules', function () {
       cy.fixture('article').then((article) => {
         cy.get(article.manageArticleTitle).click();
         cy.get(article.manageArticleBody).click();
-        cy.get(article.manageArticleTitle).contains('Please fill the field');
 
-        cy.get(`${article.manageArticleSubmit} button`).should('be.disabled');
+        cy.get(article.manageArticleTitle)
+          .contains('Please fill the field');
+        cy.get(`${article.manageArticleSubmit} button`)
+          .should('be.disabled');
       });
     });
 
     it('Verify that user unable to upload photo with size more that 1mb', function () {
-      cy.get(`input[type=file]`).attachFile('images/moreThan1mb.jpg', { subjectType: 'drag-n-drop' });
+      cy.get(`input[type=file]`)
+        .attachFile(
+          'images/moreThan1mb.jpg',
+          { subjectType: 'drag-n-drop' }
+        );
+
       cy.contains('Looks like you are trying upload too big file.');
     });
 
@@ -28,18 +36,28 @@ describe('Articles', () => {
         fileName: 'file.txt',
         mimeType: 'txt',
       }, { force: true });
+
       cy.contains('Looks like you are using unsupported file types. Please use only .png or .jpg.');
     });
 
     it('Verify that user able to create new article', () => {
       cy.fixture('article').then(article => {
-        cy.get(article.manageArticleTitle).type(article.mock.title);
-        cy.get(article.manageArticleBody).type(article.mock.body);
-        cy.get(`input[type=file]`).attachFile('images/file.png', { subjectType: 'drag-n-drop' });
+        cy.get(article.manageArticleTitle)
+          .type(article.mock.title);
+        cy.get(article.manageArticleBody)
+          .type(article.mock.body);
+        cy.get(`input[type=file]`)
+          .attachFile(
+            'images/file.png',
+            { subjectType: 'drag-n-drop' }
+          );
         cy.wait(500);
         cy.get(article.imageCropperConfirm).click();
-        cy.get(article.manageArticlePhoto).should('be.visible');
-        cy.get(`${article.manageArticleSubmit} button`).should('not.be.disabled').click();
+
+        cy.get(article.manageArticlePhoto)
+          .should('be.visible');
+        cy.get(`${article.manageArticleSubmit} button`)
+          .should('not.be.disabled').click();
         cy.contains('Article successfully created and published.');
       })
     })
@@ -73,8 +91,6 @@ describe('Articles', () => {
         cy.get(article.articlePreviewRemove).should('be.visible').click();
         cy.contains('Article successfully deleted.');
       });
-
-
     });
 
     it('Verify that user able to load more articles', function () {
