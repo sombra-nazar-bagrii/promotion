@@ -7,8 +7,6 @@
       "jasmine",
       "jest",
       "node",
-      "cypress",
-      "cypress-file-upload"
     ]
   },
   "files": [

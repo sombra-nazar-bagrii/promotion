@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component, OnInit, Output, EventEmitter } from
 export class SortingSelectorComponent implements OnInit {
 
   @Output() onSortingChange = new EventEmitter<boolean>();
-  selectedOrder = 'Ascending';
+  selectedOrder = 'Descending';
 
   constructor() { }
 

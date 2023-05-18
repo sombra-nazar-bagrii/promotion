@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ProfileService } from './profile.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { of } from 'rxjs';
 import { IUser } from "@shared";
 
@@ -16,7 +16,7 @@ describe('ProfileService', () => {
     });
 
     angularFirestoreSpy = jasmine.createSpyObj('AngularFirestore', ['doc']);
-    const docSpy = jasmine.createSpyObj<DocumentSnapshot<IUser>>('DocumentSnapshot', ['get']);
+    const docSpy = jasmine.createSpyObj('DocumentSnapshot', ['get']);
     angularFirestoreSpy.doc.and.returnValue(docSpy);
 
     TestBed.configureTestingModule({
