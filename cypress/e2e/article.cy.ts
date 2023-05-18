@@ -1,8 +1,5 @@
 describe('Articles', () => {
-  beforeEach(() => {
-    cy.wait(5000);
-    cy.fixture('auth').then(auth => cy.promo_login(auth.email, auth.password));
-  });
+  beforeEach(() => cy.fixture('auth').then(auth => cy.promo_login(auth.email, auth.password)));
 
   describe('Add new article', () => {
     beforeEach(() => cy.fixture('article')
