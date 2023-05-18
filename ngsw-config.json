@@ -25,6 +25,16 @@
           "/*.(svg|cur|jpg|jpeg|png|apng|webp|gif|otf|ttf|woff|woff2)"
         ]
       }
+    },
+    {
+      "name": "dynamic-images",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "https://firebasestorage.googleapis.com/**"
+        ]
+      }
     }
   ]
 }
