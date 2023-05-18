@@ -1,8 +1,4 @@
 describe('User auth', () => {
-  beforeEach(() => {
-    cy.visit('/');
-  })
-
   describe('Reset password page', () => {
     beforeEach(() => cy.fixture('auth').then((auth) => cy.get(auth.path.login.forgotPassLink).click()));
 
