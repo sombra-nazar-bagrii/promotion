@@ -41,7 +41,7 @@
           routerLinkActive="active"
         >
           <mat-icon>{{ item.icon }}</mat-icon>
-          {{ item.title }}</a>
+          <span class="private__container__nav__item-text">{{ item.title }}</span></a>
       </nav>
       <div class="private__container__nav__divider"></div>
 
@@ -51,7 +51,7 @@
         (click)="signOut()"
       >
         <mat-icon>logout</mat-icon>
-        Logout
+        <span class="private__container__nav__item-text">Logout</span>
       </promo-button>
 
     </mat-drawer>

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
-import { IUser, SnackBarService, LoaderService, ConfirmPasswordValidator, SNACK_BAR } from "@shared";
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { SnackBarService, LoaderService, ConfirmPasswordValidator, SNACK_BAR } from "@shared";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "@core";
 
@@ -11,7 +11,6 @@ import { AuthService } from "@core";
 })
 export class ProfilePasswordComponent implements OnInit {
 
-  @Input() current: IUser;
   userPasswordForm: FormGroup;
 
   constructor(
