@@ -1,8 +1,14 @@
-@use "variables";
+@use "variables/color";
+@use "variables/sizes";
 
 :host {
   height: 100%;
   position: relative;
+  @media (max-width: sizes.$small) {
+    padding: 10px;
+    width: 100%;
+  }
+
 }
 
 .sign-in {
@@ -13,6 +19,14 @@
   padding: 20px;
   min-width: 600px;
   row-gap: 20px;
+  @media (max-width: sizes.$medium) {
+    background: #FFFFFF;
+    box-shadow: 0px 24px 64px rgba(0, 0, 0, 0.03);
+    border-radius: 6px;
+  }
+  @media (max-width: sizes.$small) {
+    min-width: 100%;
+  }
 
   &__image {
     width: 50px;
@@ -36,7 +50,7 @@
   }
   &__registration {
     padding-top: 40px;
-    color: variables.$raven;
+    color: color.$raven;
     text-align: center;
   }
 
