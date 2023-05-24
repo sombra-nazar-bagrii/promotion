@@ -7,3 +7,4 @@ export * from './helpers';
 export * from './pipes';
 export * from './enums';
 export * from './models';
+export * from './types';
